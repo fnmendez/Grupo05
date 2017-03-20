@@ -4,9 +4,9 @@
 
 | Nombre | Github | Email |
 | :----- | :----- | :------- |
-| X | X | X |
-| X | X | X |
-| X | X | X |
+| JAVIER GONZALO MONTOYA | X | jgmontoya@uc.cl |
+| FRANCO ANDRÉS MÉNDEZ | X | fnmendez@uc.cl |
+| ANDRÉS GABRIEL MARDONES | X | agmardones@uc.cl |
 
 ## Product Owner
 | Nombre | Github | Email |
