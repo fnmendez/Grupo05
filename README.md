@@ -4,7 +4,7 @@
 
 | Nombre | Github | Email |
 | :----- | :----- | :------- |
-| JAVIER GONZALO MONTOYA | X | jgmontoya@uc.cl |
+| JAVIER GONZALO MONTOYA | @jgmontoya | jgmontoya@uc.cl |
 | FRANCO ANDRÉS MÉNDEZ | X | fnmendez@uc.cl |
 | ANDRÉS GABRIEL MARDONES | X | agmardones@uc.cl |
 
