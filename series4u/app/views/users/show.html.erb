@@ -1,0 +1,15 @@
+<h1><%= current_user.full_name %>'s profile</h1>
+
+<div>
+  Email: <%= current_user.email %>
+</div>
+
+<div>
+  Full name: <%= current_user.full_name.nil? ? 'Not specified' : current_user.full_name %>
+</div>
+
+<div>
+  Description: <%= current_user.description.nil? ? 'Not specified' : current_user.description %>
+</div>
+
+<div><%= link_to "Edit profile", edit_user_registration_path %></div>

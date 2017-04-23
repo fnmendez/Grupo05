@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Series4u</title>
+    <title>
+
+      <% if content_for? :title %>
+        Series4u | <%= yield :title %>
+      <% else %>
+        Series4u
+      <% end %>
+    </title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -13,10 +20,7 @@
       <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
     <% end %>
 
-    <% if user_signed_in? %>
-      <p><%= "Welcome #{current_user.full_name}" %></p>
-      <p><%= link_to "Edit profile", edit_user_registration_path %></p>
-    <% else %>
+    <% unless user_signed_in? %>
       <p><%=  link_to 'Sign up', new_user_registration_path%></p>
       <p><%=  link_to 'Sign in', new_user_session_path%></p>
     <% end %>
