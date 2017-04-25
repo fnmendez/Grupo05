@@ -18,4 +18,6 @@
 
 <div><%= link_to "Edit profile", edit_user_registration_path %></div>
 
-<div><%= link_to "Manage kids", '#' %></div>
+<% if current_user.role == 1 %>
+  <div><%= link_to "Manage kids", kids_path %></div>
+<% end %>

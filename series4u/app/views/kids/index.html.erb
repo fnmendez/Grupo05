@@ -1,0 +1,27 @@
+<h1><%= current_user.full_name %>'s Kid accounts</h1>
+<div class="divider"></div>
+
+<div id="kids">
+  <% @kids.each do |k| %>
+    <div class="info-name">
+      Username
+    </div>
+    <div class="info-value">
+      <%= k.username %>
+    </div>
+    <div class="info-name">
+      Full Name
+    </div>
+    <div class="info-value">
+      <%= k.full_name %>
+    </div>
+    <div class="info-name">
+      Description
+    </div>
+    <div class="info-value">
+      <%= k.description %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Add new kid', '#', class: 'button-primary' %>

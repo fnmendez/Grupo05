@@ -13,6 +13,12 @@ class User < ApplicationRecord
   has_many :serie_reviews
   has_many :serie_ratings
 
+  has_and_belongs_to_many :kids,
+                          class_name: "User",
+                          join_table: :kids,
+                          foreign_key: :user_id,
+                          association_foreign_key: :kid_user_id
+
   validates :username,
             :presence => true,
             :uniqueness => {
