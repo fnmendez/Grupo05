@@ -1,6 +1,10 @@
 <h1><%= current_user.full_name %>'s profile</h1>
 
 <div>
+  Username: <%= current_user.username %>
+</div>
+
+<div>
   Email: <%= current_user.email %>
 </div>
 
@@ -13,3 +17,5 @@
 </div>
 
 <div><%= link_to "Edit profile", edit_user_registration_path %></div>
+
+<div><%= link_to "Manage kids", '#' %></div>
