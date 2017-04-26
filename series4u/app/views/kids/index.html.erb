@@ -21,6 +21,8 @@
     <div class="info-value">
       <%= k.description %>
     </div>
+    <div class="info-value">
+      <%= link_to 'Delete kid account', destroy_kid_path(kid: k.id), method: :delete, class: 'button-primary' %>
   <% end %>
 </div>
 

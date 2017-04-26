@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable,
-         :authentication_keys => [ :username ]
+         authentication_keys: [:username]
 
   has_many :chapters
   has_many :series
@@ -16,37 +16,25 @@ class User < ApplicationRecord
   has_many :kids
   has_many :kiddies, through: :kids
 
-  has_many :inverse_kids, class_name: "Kid", foreign_key: "kiddy_id"
+  has_many :inverse_kids, class_name: 'Kid', foreign_key: 'kiddy_id'
   has_many :parents, through: :inverse_kids, source: :user
 
-=begin
-  has_and_belongs_to_many :kids,
-                          class_name: "User",
-                          join_table: :kids,
-                          foreign_key: :user_id,
-                          association_foreign_key: :kid_user_id
-=end
-
   validates :username,
-            :presence => true,
-            :uniqueness => {
-                :case_sensitive => false
-            }
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-  validate :validate_username
+            presence: true,
+            uniqueness: { case_sensitive: false }
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
-  def validate_username
-    if User.where(email: username).exists?
-      errors.add(:username, :invalid)
-    end
-  end
+  before_destroy :remove_kids
 
   def email_changed?
     false
   end
 
   def parent
-    self.parents.first
+    parents.first
   end
 
+  def remove_kids
+    Kid.where(kiddy_id: self).or(Kid.where(user_id: self)).destroy_all
+  end
 end
