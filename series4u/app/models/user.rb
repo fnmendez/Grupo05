@@ -13,11 +13,19 @@ class User < ApplicationRecord
   has_many :serie_reviews
   has_many :serie_ratings
 
+  has_many :kids
+  has_many :kiddies, through: :kids
+
+  has_many :inverse_kids, class_name: "Kid", foreign_key: "kiddy_id"
+  has_many :parents, through: :inverse_kids, source: :user
+
+=begin
   has_and_belongs_to_many :kids,
                           class_name: "User",
                           join_table: :kids,
                           foreign_key: :user_id,
                           association_foreign_key: :kid_user_id
+=end
 
   validates :username,
             :presence => true,
@@ -35,6 +43,10 @@ class User < ApplicationRecord
 
   def email_changed?
     false
+  end
+
+  def parent
+    self.parents.first
   end
 
 end
