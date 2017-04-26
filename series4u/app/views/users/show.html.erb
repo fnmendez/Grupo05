@@ -1,4 +1,11 @@
 <h1><%= current_user.full_name %>'s profile</h1>
+<% if current_user.role == 2 %>
+  <h2> <%= current_user.parent.full_name %>'s Kid account </h2>
+<% end %>
+
+<div>
+  Username: <%= current_user.username %>
+</div>
 
 <div>
   Email: <%= current_user.email %>
@@ -13,3 +20,7 @@
 </div>
 
 <div><%= link_to "Edit profile", edit_user_registration_path %></div>
+
+<% if current_user.role == 1 %>
+  <div><%= link_to "Manage kids", kids_path %></div>
+<% end %>
