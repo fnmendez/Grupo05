@@ -1,0 +1,23 @@
+
+<h1>Showing a story</h1>
+<div id="story">
+      <div class="info-name">
+        Title
+      </div>
+      <div class="info-value">
+        <%= @story.title %>
+      </div>
+      <div class="info-name">
+        Body
+      </div>
+      <div class="info-value">
+        <%= @story.content %>
+      </div>
+      <div class="info-name">
+        Date
+      </div>
+      <div class="info-value">
+        <%= @story.date %>
+      </div>
+<%= link_to 'Edit story', edit_story_path(@story), class: 'button-primary' %>
+</div>
