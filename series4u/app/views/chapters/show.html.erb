@@ -35,6 +35,13 @@
 </p>
 
 <p>
+  <strong>Your Rating:</strong>
+  <% @view_id = View.where(user_id: current_user.id, chapter_id: @chapter.id).take.id %>
+  <%= ChapterRating.where(view_id: @view_id).take.stars %>
+</p>
+
+
+<p>
   <strong>Rating Avg:</strong>
   <% @ratings = [] %>
   <% @views.each do |rv| %>
