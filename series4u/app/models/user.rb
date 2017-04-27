@@ -34,6 +34,14 @@ class User < ApplicationRecord
     parents.first
   end
 
+  def is_admin?
+    role == 0
+  end
+
+  def is_kid?
+    role == 2
+  end
+
   def remove_kids
     Kid.where(kiddy_id: self).or(Kid.where(user_id: self)).destroy_all
   end
