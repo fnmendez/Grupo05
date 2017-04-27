@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resource :user, :only => [:show]
 
   resources :kids, only: [:index, :show, :new, :create]
+  resources :stories
+  
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "static_pages#index"
