@@ -20,5 +20,30 @@
   <%= @chapter.season_id %>
 </p>
 
+<p>
+  <strong>Actors:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @actors.each do |chact| %>
+        <tr>
+          <td><%= Actor.find(chact.actor_id).name %></td>
+          <td><%= Actor.find(chact.actor_id).created_at %></td>
+          <td><%= Actor.find(chact.actor_id).updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+
 <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
 <%= link_to 'Back', chapters_path %>
