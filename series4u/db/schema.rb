@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426044513) do
+ActiveRecord::Schema.define(version: 20170427042254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170426044513) do
     t.bigint "season_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["season_id"], name: "index_chapters_on_season_id"
     t.index ["user_id"], name: "index_chapters_on_user_id"
   end

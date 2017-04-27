@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :chapters
   # devise_for :users
   devise_for :user, controllers: {
       passwords: 'users/passwords',
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   resource :user, :only => [:show]
+
+  resources :chapter
 
   resources :kids, only: [:index, :show, :new, :create]
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
