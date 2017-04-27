@@ -1,0 +1,39 @@
+<%= form_with(model: chapter, local: true) do |form| %>
+  <% if chapter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chapter.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+
+      <ul>
+      <% chapter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :chapter_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_area :summary, id: :chapter_summary %>
+  </div>
+
+  <% if current_user.role == 0 %>
+    <div class="field">
+      <%= form.label :user_id %>
+      <%= form.text_area :user_id, id: :chapter_user_id %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :season_id %>
+    <%= form.number_field :season_id, id: :chapter_season_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
