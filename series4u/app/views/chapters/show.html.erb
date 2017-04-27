@@ -12,7 +12,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @chapter.user_id %>
+  <%= User.find(@chapter.user_id).username %>
 </p>
 
 <p>
@@ -22,22 +22,34 @@
 
 <p>
   <strong>Actors:</strong>
+    <% @actors.each do |chact| %>
+      <%= Actor.find(chact.actor_id).name %>,
+    <% end %>
+</p>
+
+<p>
+  <strong>Directors:</strong>
+    <% @directors.each do |chdir| %>
+      <%= Director.find(chdir.director_id).name %>,
+    <% end %>
+</p>
+
+<p>
+  <strong>Reviews:</strong>
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <th colspan="2"></th>
+        <th>User</th>
+        <th>Content</th>
+        <th colspan="1"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @actors.each do |chact| %>
+      <% @views.each do |rv| %>
         <tr>
-          <td><%= Actor.find(chact.actor_id).name %></td>
-          <td><%= Actor.find(chact.actor_id).created_at %></td>
-          <td><%= Actor.find(chact.actor_id).updated_at %></td>
+          <td><%= User.find(rv.user_id).username %></td>
+          <td><%= ChapterReview.where(view_id: rv.id).take.content %></td>
         </tr>
       <% end %>
     </tbody>

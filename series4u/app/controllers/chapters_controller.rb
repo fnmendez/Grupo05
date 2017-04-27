@@ -11,6 +11,8 @@ class ChaptersController < ApplicationController
   # GET /chapters/1.json
   def show
     @actors = ChapterAct.where(chapter_id: @chapter.id).find_each
+    @directors = ChapterDirected.where(chapter_id: @chapter.id).find_each
+    @views = View.where(chapter_id: @chapter.id).find_each
   end
 
   # GET /chapters/new
