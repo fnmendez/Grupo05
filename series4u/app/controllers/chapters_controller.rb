@@ -13,6 +13,7 @@ class ChaptersController < ApplicationController
     @actors = ChapterAct.where(chapter_id: @chapter.id).find_each
     @directors = ChapterDirected.where(chapter_id: @chapter.id).find_each
     @views = View.where(chapter_id: @chapter.id).find_each
+    
   end
 
   # GET /chapters/new

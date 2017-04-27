@@ -35,6 +35,17 @@
 </p>
 
 <p>
+  <strong>Rating Avg:</strong>
+  <% @ratings = [] %>
+  <% @views.each do |rv| %>
+    <% ChapterRating.where(view_id: rv.id).find_each.each do |chr| %>
+      <% @ratings << chr.stars %>
+    <% end %>
+  <% end %>
+  <%= @ratings.sum/@ratings.count %>
+</p>
+
+<p>
   <strong>Reviews:</strong>
   <table>
     <thead>
