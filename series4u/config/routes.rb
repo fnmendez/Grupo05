@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   end
 
   resource :user, only: [:show]
+  resources :users, only: [:index]
+  get 'users/:id' => 'users#admin_show'
+  delete 'users' => 'users#destroy', as: :destroy_users
 
   resources :kids, only: [:index, :show, :new, :create]
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
