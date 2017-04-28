@@ -22,4 +22,27 @@
 
 <h2>Seasons: </h2>
 
+<table>
+  <thead>
+    <tr>
+      <th>
+        Number
+      </th>
+      <th>
+        Release_Date
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Season.where(serie_id: @serie.id).find_each.each do |season| %>
+      <tr>
+        <td><%= season.number %></td>
+        <td><%= season.release_date %></td>
+        <td><%= link_to 'Show', season %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Back', series_index_path %>

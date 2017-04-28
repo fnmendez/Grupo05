@@ -25,12 +25,14 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
 
-  resources :chapter
-  resources :chapter_act
-  resources :chapter_directed
+  resources :seasons
+
+  resources :chapters
+  resources :chapter_acts
+  resources :chapter_directeds
 
   resources :kids, only: [:index, :show, :new, :create]
-  resources :stories 
+  resources :stories
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

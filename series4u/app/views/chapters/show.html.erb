@@ -52,7 +52,9 @@
       <% @ratings << chr.stars %>
     <% end %>
   <% end %>
-  <%= @ratings.sum/@ratings.count %>
+  <% if @ratings.count != 0 %>
+    <%= @ratings.sum/@ratings.count %>
+  <% end %>
 </p>
 
 <p>
