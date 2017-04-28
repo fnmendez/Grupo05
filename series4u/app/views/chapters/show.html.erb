@@ -23,14 +23,17 @@
 <p>
   <strong>Actors:</strong>
     <% @actors.each do |chact| %>
-      <%= Actor.find(chact.actor_id).name %>,
+      <%= Actor.find(chact.actor_id).name %>
+      <%= link_to 'Destroy', chact, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
+
 </p>
 
 <p>
   <strong>Directors:</strong>
     <% @directors.each do |chdir| %>
-      <%= Director.find(chdir.director_id).name %>,
+      <%= Director.find(chdir.director_id).name %>
+      <%= link_to 'Destroy', chdir, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
 </p>
 

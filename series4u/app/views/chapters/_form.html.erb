@@ -21,18 +21,6 @@
     <%= form.text_area :summary, id: :chapter_summary %>
   </div>
 
-  <% if current_user.role == 0 %>
-    <div class="field">
-      <%= form.label :user_id %>
-      <%= form.text_area :user_id, id: :chapter_user_id %>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :season_id %>
-    <%= form.number_field :season_id, id: :chapter_season_id %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

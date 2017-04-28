@@ -4,7 +4,7 @@ class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Chapter.all
+    @chapters = Chapter.where(season_id: params[:season_id]).find_each
   end
 
   # GET /chapters/1
@@ -13,7 +13,6 @@ class ChaptersController < ApplicationController
     @actors = ChapterAct.where(chapter_id: @chapter.id).find_each
     @directors = ChapterDirected.where(chapter_id: @chapter.id).find_each
     @views = View.where(chapter_id: @chapter.id).find_each
-    
   end
 
   # GET /chapters/new
@@ -30,6 +29,7 @@ class ChaptersController < ApplicationController
   def create
     @chapter = Chapter.new(chapter_params)
     @chapter.user = current_user
+    @chapter.season = Season.find(params[:season_id])
 
     respond_to do |format|
       if @chapter.save
@@ -61,7 +61,7 @@ class ChaptersController < ApplicationController
   def destroy
     @chapter.destroy
     respond_to do |format|
-      format.html { redirect_to chapters_url, notice: 'Chapter was successfully destroyed.' }
+      format.html { redirect_to Season.find(params[:season_id]), notice: 'Chapter was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
