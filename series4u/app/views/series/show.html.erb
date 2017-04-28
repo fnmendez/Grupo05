@@ -1,4 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_series_path(@series) %> |
-<%= link_to 'Back', series_path %>
+<h1><%= @serie.title %></h1>
+
+<div class="serie-atrib">
+  Country: <%= @serie.country %>
+</div>
+<div class="serie-atrib">
+  Genre: <%= @serie.genre %>
+</div>
+<div class="serie-atrib">
+  Added by: <%= @serie.user.username %>
+</div>
+<div class="serie-atrib">
+  Country: <%= @serie.country %>
+</div>
+
+<% if !@serie.public? || current_user.is_admin? %>
+    <td><%= link_to 'Edit', edit_series_path(@serie) %></td>
+    <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+<h2>Seasons: </h2>
+
+<%= link_to 'Back', series_index_path %>

@@ -4,35 +4,35 @@ class SeriesController < ApplicationController
   # GET /series
   # GET /series.json
   def index
-    @series = Serie.all
+    @series = Serie.viewable_series(current_user)
   end
 
   # GET /series/1
   # GET /series/1.json
   def show
+    @serie = Serie.find(params[:id])
   end
 
   # GET /series/new
   def new
-    @series = Serie.new
+    @serie = Serie.new
   end
 
   # GET /series/1/edit
   def edit
+    @serie = Serie.find(params[:id])
   end
 
   # POST /series
   # POST /series.json
   def create
-    @series = Serie.new(series_params)
+    @serie = Serie.new(series_params)
 
     respond_to do |format|
-      if @series.save
-        format.html { redirect_to @series, notice: 'Serie was successfully created.' }
-        format.json { render :show, status: :created, location: @series }
+      if @serie.save
+        format.html { redirect_to @serie, notice: 'Serie was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @series.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,6 +69,6 @@ class SeriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
-      params.fetch(:series, {})
+      params.require(:serie).permit(:title, :country, :genre).merge({user: current_user})
     end
 end

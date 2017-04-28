@@ -1,15 +1,19 @@
-<%= form_with(model: series, local: true) do |form| %>
-  <% if series.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(series.errors.count, "error") %> prohibited this series from being saved:</h2>
+<%= form_for @serie, url: url do |form| %>
 
-      <ul>
-      <% series.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="input-field">
+    <%= form.label :title, 'Title:' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :country, 'Country:' %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :genre, 'Genre:' %>
+    <%= form.text_field :genre %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
