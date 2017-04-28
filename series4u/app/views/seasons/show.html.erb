@@ -15,21 +15,14 @@
   <%= Serie.find(@season.serie_id).title %>
 </p>
 
-<p>
-  <strong>Created at:</strong>
-  <%= @season.created_at %>
-</p>
-
-<p>
-  <strong>Updated at:</strong>
-  <%= @season.updated_at %>
-</p>
-
 <h2>Chapters: </h2>
 
 <table>
   <thead>
     <tr>
+      <th>
+        n°
+      </th>
       <th>
         Title
       </th>
@@ -43,13 +36,16 @@
   </thead>
 
   <tbody>
+    <% @n = 1 %>
     <% Chapter.where(season_id: @season.id).find_each.each do |chapter| %>
       <tr>
+        <td><%= @n %></td>
         <td><%= chapter.title %></td>
         <td><%= chapter.summary %></td>
         <td><%= User.find(chapter.user_id).username %></td>
         <td><%= link_to 'Show', chapter %></td>
       </tr>
+      <%@n = @n + 1%>
     <% end %>
   </tbody>
 </table>

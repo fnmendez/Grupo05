@@ -39,8 +39,10 @@
 
 <p>
   <strong>Your Rating:</strong>
-  <% @view_id = View.where(user_id: current_user.id, chapter_id: @chapter.id).take.id %>
-  <%= ChapterRating.where(view_id: @view_id).take.stars %>
+  <% if View.where(user_id: current_user.id, chapter_id: @chapter.id).exists? %>
+    <% @view_id = View.where(user_id: current_user.id, chapter_id: @chapter.id).take.id %>
+    <%= ChapterRating.where(view_id: @view_id).take.stars %>
+  <% end %>
 </p>
 
 
@@ -59,26 +61,28 @@
 
 <p>
   <strong>Reviews:</strong>
-  <table>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Content</th>
-        <th colspan="1"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @views.each do |rv| %>
+  <% if @views.count != 0 %>
+    <table>
+      <thead>
         <tr>
-          <td><%= User.find(rv.user_id).username %></td>
-          <td><%= ChapterReview.where(view_id: rv.id).take.content %></td>
+          <th>User</th>
+          <th>Content</th>
+          <th colspan="1"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @views.each do |rv| %>
+          <tr>
+            <td><%= User.find(rv.user_id).username %></td>
+            <td><%= ChapterReview.where(view_id: rv.id).take.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </p>
 
 
 <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
-<%= link_to 'Back', chapters_path %>
+<%= link_to 'Back', Season.find(@chapter.season_id) %>
