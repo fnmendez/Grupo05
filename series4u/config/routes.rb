@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resource :user, :only => [:show]
 
   resources :chapter
+  resources :chapter_act
+  resources :chapter_directed
 
   resources :kids, only: [:index, :show, :new, :create]
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
