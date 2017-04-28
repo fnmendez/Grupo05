@@ -4,7 +4,7 @@ class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Chapter.where(season_id: params[:season_id]).find_each
+    @chapters = Chapter.all
   end
 
   # GET /chapters/1
