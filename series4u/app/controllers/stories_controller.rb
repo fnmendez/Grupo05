@@ -21,7 +21,14 @@ class StoriesController < ApplicationController
   		else 
     		flash[:errors] = @story.errors 
   		end 
+  	end
+
+  	def destroy
+  		@story = Story.find(params[:id])
+  		@story.destroy
+  		redirect_to '/stories'
 	end
+
 	def update 
   		@story = Story.find(params[:id]) 
   		if @story.update_attributes(story_params) 
