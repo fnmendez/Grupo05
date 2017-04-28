@@ -3,9 +3,6 @@
 <h1><%= @serie.title %></h1>
 
 <div class="serie-atrib">
-  Country: <%= @serie.country %>
-</div>
-<div class="serie-atrib">
   Genre: <%= @serie.genre %>
 </div>
 <div class="serie-atrib">
@@ -21,7 +18,7 @@
 <% end %>
 
 <h2>Seasons: </h2>
-
+<%= link_to 'New Season', new_season_path(:serie_id => @serie.id) %>
 <table>
   <thead>
     <tr>
