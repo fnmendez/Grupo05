@@ -1,0 +1,20 @@
+<% provide :title, 'Creating a new story' %>
+<h1>Add new story</h1>
+<div class="divider"></div>
+<%= form_for @story, url: {controller: :stories, action: :create}, as: :story do |f| %>
+    <div class="input-field">
+      <%= f.label :title, 'Title:' %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="input-field">
+      <%= f.label :content, 'Content:' %>
+      <%= f.text_field :content %>
+    </div>
+    <div class="input-field">
+      <%= f.label :date, 'Date:' %>
+      <%= f.text_field :date %>
+    </div>
+    <div class="submit-button">
+      <%= f.submit "Create story" %>
+    </div>
+<% end %>

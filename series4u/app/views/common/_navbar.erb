@@ -1,7 +1,7 @@
 <div class="navbar">
   <div class="navbar-left">
     <% if user_signed_in? %>
-      <%= link_to 'News', root_path, class: 'navbar-link' %>
+      <%= link_to 'News', stories_path, class: 'navbar-link' %>
       <%= link_to 'My Profile', user_path, class: 'navbar-link' %>
       <%= link_to 'Series', series_index_path, class: 'navbar-link' %>
       <% if current_user.is_admin? %>
