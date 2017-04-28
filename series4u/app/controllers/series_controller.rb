@@ -10,6 +10,7 @@ class SeriesController < ApplicationController
   # GET /series/1
   # GET /series/1.json
   def show
+    @serie = Serie.find(params[:id])
   end
 
   # GET /series/new
@@ -19,6 +20,7 @@ class SeriesController < ApplicationController
 
   # GET /series/1/edit
   def edit
+    @serie = Serie.find(params[:id])
   end
 
   # POST /series

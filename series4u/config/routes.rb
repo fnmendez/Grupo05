@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :series
+  get '/series/new' => 'series#new', as: :new_series
+  post '/series/new' => 'series#create'
+  get '/series/:id/edit' => 'series#edit', as: :edit_series
+  patch '/series/:id' => 'series#update'
+  resources :series, only: [:index, :show, :delete]
   # devise_for :users
   devise_for :user, controllers: {
       passwords: 'users/passwords',

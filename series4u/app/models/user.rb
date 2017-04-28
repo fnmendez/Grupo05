@@ -24,7 +24,7 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
-  before_destroy :remove_kids
+  before_destroy :remove_kids, :remove_series
 
   def email_changed?
     false
@@ -43,6 +43,15 @@ class User < ApplicationRecord
   end
 
   def remove_kids
+    user_kids =  User.select { |user| user.is_kid? && user.parent == self }
+    user_kids.each do |k|
+      k.destroy
+    end
     Kid.where(kiddy_id: self).or(Kid.where(user_id: self)).destroy_all
   end
+
+  def remove_series
+    Serie.destroy_from(self)
+  end
+
 end

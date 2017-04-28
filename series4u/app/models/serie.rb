@@ -13,4 +13,8 @@ class Serie < ApplicationRecord
     end
     all.select{ |serie| serie.public? || serie.user == viewer }
   end
+
+  def self.destroy_from(creator)
+    where(user: creator).destroy_all
+  end
 end
