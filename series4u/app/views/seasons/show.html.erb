@@ -6,7 +6,7 @@
 
 <p>
   <strong>From Serie:</strong>
-  <%= Serie.find(@season.serie_id).title %>
+  <%= @season.serie.title %>
 </p>
 
 
@@ -21,7 +21,7 @@
 <p>
   <h2>Chapters: </h2>
   <%= link_to 'New Chapter', new_season_chapter_path(@season) %>
-  <% if Chapter.where(season_id: @season.id).exists? %>
+  <% if @season.chapters.exists? %>
     <table>
       <thead>
         <tr>
@@ -42,12 +42,12 @@
 
       <tbody>
         <% @n = 1 %>
-        <% Chapter.where(season_id: @season.id).find_each.each do |chapter| %>
+        <% @season.chapters.each do |chapter| %>
           <tr>
             <td><%= @n %></td>
             <td><%= chapter.title %></td>
             <td><%= chapter.summary %></td>
-            <td><%= User.find(chapter.user_id).username %></td>
+            <td><%= chapter.user.username %></td>
             <td><%= link_to 'Show', chapter %></td>
           </tr>
           <%@n = @n + 1%>
@@ -57,4 +57,4 @@
   <% end %>
 </p>
 
-<%= link_to 'Back', Serie.find(@season.serie_id) %>
+<%= link_to 'Back', @season.serie %>

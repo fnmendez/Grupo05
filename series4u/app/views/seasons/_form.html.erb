@@ -1,8 +1,8 @@
-<%= form_for @season, url: series_seasons_path do |form| %>
+<%= form_for @season, url: url do |form| %>
 
   <div class="field">
     <%= form.label :number %>
-    <%= form.number_field :number, id: :season_number %>
+    <%= form.number_field :number, id: :season_number, min: 1 %>
   </div>
 
   <div class="field">

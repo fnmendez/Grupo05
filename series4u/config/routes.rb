@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   resources :seasons do
     resources :chapters, shallow: true
-      end
+  end
 
   # devise_for :users
   devise_for :user, controllers: {
@@ -39,5 +39,5 @@ Rails.application.routes.draw do
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "static_pages#index"
+  root to: "stories#index"
 end

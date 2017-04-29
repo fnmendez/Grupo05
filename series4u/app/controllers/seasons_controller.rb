@@ -20,6 +20,7 @@ class SeasonsController < ApplicationController
 
   # GET /seasons/1/edit
   def edit
+    @season = Season.find(params[:id])
   end
 
   # POST /seasons
@@ -42,7 +43,7 @@ class SeasonsController < ApplicationController
   # PATCH/PUT /seasons/1
   # PATCH/PUT /seasons/1.json
   def update
-    @serie = Serie.find(@season.serie_id)
+    @serie = @season.serie
     respond_to do |format|
       if @season.update(season_params)
         format.html { redirect_to @season, notice: 'Season was successfully updated.' }
