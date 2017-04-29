@@ -1,27 +1,20 @@
 
-<h1>Showing a story</h1>
+<h1><%= @story.title %></h1>
 <div id="story">
-      <div class="info-name">
-        Title
-      </div>
-      <div class="info-value">
-        <%= @story.title %>
-      </div>
-      <div class="info-name">
-        Body
-      </div>
       <div class="info-value">
         <%= @story.content %>
       </div>
       <div class="info-name">
-        Date
+        Date:
       </div>
       <div class="info-value">
         <%= @story.date %>
       </div>
-<%= link_to 'Edit story', story_path(@story), class: 'button-primary' %>
-<%= link_to 'Delete', story_path(@story), :method => :delete, 
-                                        :confirm => "Are you sure you want to delete?", 
-                                        :remote => true, 
-                                        class: 'btn btn-table-action btn-danger' %> 
+  <% if current_user.is_admin? %>
+    <%= link_to 'Edit story', edit_story_path(@story), class: 'button-primary' %>
+    <%= link_to 'Delete', story_path(@story), :method => :delete,
+                                            :confirm => "Are you sure you want to delete?",
+                                            :remote => true,
+                                            class: 'btn btn-table-action btn-danger' %>
+  <% end %>
 </div>
