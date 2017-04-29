@@ -14,6 +14,7 @@ class SeasonsController < ApplicationController
 
   # GET /seasons/new
   def new
+    @serie = Serie.find(params[:series_id])
     @season = Season.new
   end
 

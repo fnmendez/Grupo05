@@ -1,54 +1,56 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Number:</strong>
-  <%= @season.number %>
+  <h1>Season n°: <%= @season.number %> </h1>
 </p>
+
+<p>
+  <strong>From Serie:</strong>
+  <%= Serie.find(@season.serie_id).title %>
+</p>
+
 
 <p>
   <strong>Release date:</strong>
   <%= @season.release_date %>
 </p>
 
-<p>
-  <strong>Serie:</strong>
-  <%= Serie.find(@season.serie_id).title %>
-</p>
-
 <h2>Chapters: </h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        n°
-      </th>
-      <th>
-        Title
-      </th>
-      <th>
-        Summary
-      </th>
-      <th>
-        Owner
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @n = 1 %>
-    <% Chapter.where(season_id: @season.id).find_each.each do |chapter| %>
+<%= link_to 'New Chapter', new_season_chapter_path(@season) %>
+<% if Chapter.where(season_id: @season.id).exists? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= @n %></td>
-        <td><%= chapter.title %></td>
-        <td><%= chapter.summary %></td>
-        <td><%= User.find(chapter.user_id).username %></td>
-        <td><%= link_to 'Show', chapter %></td>
+        <th>
+          n°
+        </th>
+        <th>
+          Title
+        </th>
+        <th>
+          Summary
+        </th>
+        <th>
+          Added by
+        </th>
       </tr>
-      <%@n = @n + 1%>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @n = 1 %> 
+      <% Chapter.where(season_id: @season.id).find_each.each do |chapter| %>
+        <tr>
+          <td><%= @n %></td>
+          <td><%= chapter.title %></td>
+          <td><%= chapter.summary %></td>
+          <td><%= User.find(chapter.user_id).username %></td>
+          <td><%= link_to 'Show', chapter %></td>
+        </tr>
+        <%@n = @n + 1%>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <%= link_to 'Edit', edit_season_path(@season) %> |
 <%= link_to 'Back', Serie.find(@season.serie_id) %>

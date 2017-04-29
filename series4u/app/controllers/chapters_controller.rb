@@ -17,6 +17,7 @@ class ChaptersController < ApplicationController
 
   # GET /chapters/new
   def new
+    @season = Season.find(params[:season_id])
     @chapter = Chapter.new
   end
 
