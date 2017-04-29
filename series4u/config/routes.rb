@@ -24,6 +24,12 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
 
+  resources :users do
+    member do
+      get 'promote'
+    end
+  end
+
   resources :kids, only: [:index, :show, :new, :create]
   resources :stories 
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
