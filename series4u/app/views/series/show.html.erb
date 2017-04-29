@@ -17,6 +17,7 @@
     <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
 
+<p>
 <h2>Seasons: </h2>
 <%= link_to 'New Season', new_series_season_path(@serie) %>
 <% if Season.where(serie_id: @serie.id).exists? %>
@@ -43,5 +44,6 @@
     </tbody>
   </table>
 <% end %>
+</p>
 
 <%= link_to 'Back', series_index_path %>

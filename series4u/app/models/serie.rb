@@ -1,7 +1,7 @@
 class Serie < ApplicationRecord
   belongs_to :user
-  has_many :seasons
-  has_many :chapters, through: :seasons
+  has_many :seasons, dependent: :destroy
+  has_many :chapters, through: :seasons, dependent: :destroy
 
   def public?
     self.user.is_admin?

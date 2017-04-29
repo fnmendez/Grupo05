@@ -84,5 +84,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+<%= link_to 'Edit', edit_chapter_path(@chapter) %> | 
+<%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', Season.find(@chapter.season_id) %>
