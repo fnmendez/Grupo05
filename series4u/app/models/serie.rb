@@ -8,6 +8,9 @@ class Serie < ApplicationRecord
   end
 
   def self.viewable_series(viewer)
+    if viewer.nil?
+      return all.select{ |serie| serie.public? }
+    end
     if viewer.is_admin?
       return all
     end

@@ -15,12 +15,15 @@
   <%= @season.release_date %>
 </p>
 
-<%= link_to 'Edit', edit_season_path(@season) %> | 
-<%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
-
+<% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
+  <%= link_to 'Edit', edit_season_path(@season) %> |
+  <%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
 <p>
   <h2>Chapters: </h2>
-  <%= link_to 'New Chapter', new_season_chapter_path(@season) %>
+  <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
+    <%= link_to 'New Chapter', new_season_chapter_path(@season) %>
+  <% end %>
   <% if @season.chapters.exists? %>
     <table>
       <thead>

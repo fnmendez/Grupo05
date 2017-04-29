@@ -12,7 +12,7 @@
   Country: <%= @serie.country %>
 </div>
 
-<% if !@serie.public? || current_user.is_admin? %>
+<% if user_signed_in? && (!@serie.public? || current_user.is_admin?) %>
     <td><%= link_to 'Edit', edit_series_path(@serie) %></td>
     <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
@@ -20,7 +20,7 @@
 <p>
 <h2>Seasons: </h2>
 <%= link_to 'New Season', new_series_season_path(@serie) %>
-<% if Season.where(serie_id: @serie.id).exists? %>
+<% if @serie.seasons.exists? %>
   <table>
     <thead>
       <tr>
@@ -34,7 +34,7 @@
     </thead>
 
     <tbody>
-      <% Season.where(serie_id: @serie.id).find_each.each do |season| %>
+      <% @serie.seasons.each do |season| %>
         <tr>
           <td><%= season.number %></td>
           <td><%= season.release_date %></td>
