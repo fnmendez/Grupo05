@@ -11,6 +11,9 @@
     <th>
       Description
     </th>
+    <th>
+      Admin?
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -27,8 +30,18 @@
               <%= user.description %>
             </td>
             <td>
-              <%= link_to 'Delete Account', destroy_users_path(user_id: user.id), method: :delete, class: "button-primary" %>
+              <%= user.is_admin? ? 'Yes': 'No' %>
             </td>
+            <% unless user.is_admin? %>
+              <td>
+                <%= link_to 'Delete Account', destroy_users_path(user_id: user.id), method: :delete, class: "button-primary" %>
+              </td>
+            <% end %>
+            <% if !user.is_admin? && !user.is_kid? %>
+              <td>
+                <%= link_to 'Promote to Admin', promote_user_path(id: user.id) %>
+              </td>
+            <% end %>
           </tr>
       <% end %>
   <% end %>

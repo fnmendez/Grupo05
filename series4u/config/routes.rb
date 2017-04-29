@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
 
+  resources :users do
+    member do
+      get 'promote'
+    end
+  end
   resources :chapter
   resources :chapter_act
   resources :chapter_directed
