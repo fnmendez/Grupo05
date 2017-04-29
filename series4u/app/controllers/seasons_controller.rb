@@ -42,6 +42,7 @@ class SeasonsController < ApplicationController
   # PATCH/PUT /seasons/1
   # PATCH/PUT /seasons/1.json
   def update
+    @serie = Serie.find(@season.serie_id)
     respond_to do |format|
       if @season.update(season_params)
         format.html { redirect_to @season, notice: 'Season was successfully updated.' }
@@ -58,7 +59,7 @@ class SeasonsController < ApplicationController
   def destroy
     @season.destroy
     respond_to do |format|
-      format.html { redirect_to seasons_url, notice: 'Season was successfully destroyed.' }
+      format.html { redirect_to Serie.find(@season.serie_id), notice: 'Season was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
