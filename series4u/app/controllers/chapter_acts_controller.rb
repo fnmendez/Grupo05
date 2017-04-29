@@ -1,4 +1,4 @@
-class ChapterActController < ApplicationController
+class ChapterActsController < ApplicationController
   before_action :set_chapter_act, only: [:show, :edit, :update, :destroy]
 
   # GET /chapter_act
