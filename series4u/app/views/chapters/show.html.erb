@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @chapter.title %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @chapter.summary %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= User.find(@chapter.user_id).username %>
+</p>
+
+<p>
+  <strong>Season:</strong>
+  <%= @chapter.season_id %>
+</p>
+
+<p>
+  <strong>Actors:</strong>
+    <% @actors.each do |chact| %>
+      <%= Actor.find(chact.actor_id).name %>
+      <%= link_to 'Destroy', chact, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% end %>
+
+</p>
+
+<p>
+  <strong>Directors:</strong>
+    <% @directors.each do |chdir| %>
+      <%= Director.find(chdir.director_id).name %>
+      <%= link_to 'Destroy', chdir, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% end %>
+</p>
+
+<p>
+  <strong>Your Rating:</strong>
+  <% @view_id = View.where(user_id: current_user.id, chapter_id: @chapter.id).take.id %>
+  <%= ChapterRating.where(view_id: @view_id).take.stars %>
+</p>
+
+
+<p>
+  <strong>Rating Avg:</strong>
+  <% @ratings = [] %>
+  <% @views.each do |rv| %>
+    <% ChapterRating.where(view_id: rv.id).find_each.each do |chr| %>
+      <% @ratings << chr.stars %>
+    <% end %>
+  <% end %>
+  <%= @ratings.sum/@ratings.count %>
+</p>
+
+<p>
+  <strong>Reviews:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Content</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @views.each do |rv| %>
+        <tr>
+          <td><%= User.find(rv.user_id).username %></td>
+          <td><%= ChapterReview.where(view_id: rv.id).take.content %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+
+<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+<%= link_to 'Back', chapters_path %>

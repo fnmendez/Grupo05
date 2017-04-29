@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
   resources :series, only: [:index, :show, :delete]
+
   # devise_for :users
   devise_for :user, controllers: {
       passwords: 'users/passwords',
@@ -29,6 +30,9 @@ Rails.application.routes.draw do
       get 'promote'
     end
   end
+  resources :chapter
+  resources :chapter_act
+  resources :chapter_directed
 
   resources :kids, only: [:index, :show, :new, :create]
   resources :stories 
