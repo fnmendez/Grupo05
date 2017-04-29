@@ -37,7 +37,7 @@
     </thead>
 
     <tbody>
-      <% @n = 1 %> 
+      <% @n = 1 %>
       <% Chapter.where(season_id: @season.id).find_each.each do |chapter| %>
         <tr>
           <td><%= @n %></td>
