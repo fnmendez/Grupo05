@@ -10,7 +10,7 @@
       <div class="info-value">
         <%= @story.date %>
       </div>
-  <% if current_user.is_admin? %>
+  <% if user_signed_in? && current_user.is_admin? %>
     <%= link_to 'Edit story', edit_story_path(@story), class: 'button-primary' %>
     <%= link_to 'Delete', story_path(@story), :method => :delete,
                                             :confirm => "Are you sure you want to delete?",
