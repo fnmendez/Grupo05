@@ -1,0 +1,16 @@
+<%= form_for @season, url: url do |form| %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number, id: :season_number, min: 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_date %>
+    <%= form.date_select :release_date, id: :season_release_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

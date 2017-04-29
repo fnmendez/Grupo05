@@ -1,4 +1,4 @@
-class ChapterDirectedController < ApplicationController
+class ChapterDirectedsController < ApplicationController
   before_action :set_chapter_directed, only: [:show, :edit, :update, :destroy]
 
   # GET /chapter_directed

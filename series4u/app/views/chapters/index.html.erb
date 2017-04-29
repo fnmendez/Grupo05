@@ -18,11 +18,13 @@
       <tr>
         <td><%= chapter.title %></td>
         <td><%= chapter.summary %></td>
-        <td><%= User.find(chapter.user_id).username %></td>
-        <td><%= Season.find(chapter.season_id).number %></td>
+        <td><%= chapter.user.username %></td>
+        <td><%= chapter.season.number %></td>
         <td><%= link_to 'Show', chapter %></td>
-        <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
-        <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= unless current_user.is_admin? %>
+          <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
+          <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Chapter', new_chapter_path %>
+<%= link_to 'New Chapter', new_season_chapter_path %>

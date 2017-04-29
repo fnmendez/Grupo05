@@ -2,6 +2,7 @@
 
 <h1>Series</h1>
 
+
 <table>
   <thead>
     <tr>
@@ -18,13 +19,15 @@
   </thead>
 
   <tbody>
-    <% @series.each do |series| %>
-      <tr>
-        <td><%= series.title %></td>
-        <td><%= series.country %></td>
-        <td><%= series.genre %></td>
-        <td><%= link_to 'Show', series %></td>
-      </tr>
+    <% @series.each do |serie| %>
+      <% if current_user.role == 0 or serie.user_id == current_user.id %>
+        <tr>
+          <td><%= serie.title %></td>
+          <td><%= serie.country %></td>
+          <td><%= serie.genre %></td>
+          <td><%= link_to 'Show', serie %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

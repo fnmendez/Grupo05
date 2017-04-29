@@ -4,24 +4,24 @@ class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Chapter.where(season_id: params[:season_id]).find_each
+    @chapters = Chapter.all
   end
 
   # GET /chapters/1
   # GET /chapters/1.json
   def show
-    @actors = ChapterAct.where(chapter_id: @chapter.id).find_each
-    @directors = ChapterDirected.where(chapter_id: @chapter.id).find_each
-    @views = View.where(chapter_id: @chapter.id).find_each
+    @chapter = Chapter.find(params[:id])
   end
 
   # GET /chapters/new
   def new
+    @season = Season.find(params[:season_id])
     @chapter = Chapter.new
   end
 
   # GET /chapters/1/edit
   def edit
+    @chapter = Chapter.find(params[:id])
   end
 
   # POST /chapters
@@ -45,6 +45,7 @@ class ChaptersController < ApplicationController
   # PATCH/PUT /chapters/1
   # PATCH/PUT /chapters/1.json
   def update
+    @season = @chapter.season
     respond_to do |format|
       if @chapter.update(chapter_params)
         format.html { redirect_to @chapter, notice: 'Chapter was successfully updated.' }
@@ -59,9 +60,10 @@ class ChaptersController < ApplicationController
   # DELETE /chapters/1
   # DELETE /chapters/1.json
   def destroy
+    @season = @chapter.season
     @chapter.destroy
     respond_to do |format|
-      format.html { redirect_to Season.find(params[:season_id]), notice: 'Chapter was successfully destroyed.' }
+      format.html { redirect_to @season, notice: 'Chapter was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

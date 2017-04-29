@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
   resources :series, only: [:index, :show, :delete]
+  resources :series do
+    resources :seasons, shallow: true
+  end
+  resources :seasons do
+    resources :chapters, shallow: true
+  end
 
   # devise_for :users
   devise_for :user, controllers: {
@@ -24,20 +30,19 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
-
   resources :users do
     member do
       get 'promote'
     end
   end
-  resources :chapter
-  resources :chapter_act
-  resources :chapter_directed
+  
+  resources :chapter_acts, only: [:delete]
+  resources :chapter_directeds, only: [:delete]
 
   resources :kids, only: [:index, :show, :new, :create]
-  resources :stories 
+  resources :stories
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "static_pages#index"
+  root to: "stories#index"
 end

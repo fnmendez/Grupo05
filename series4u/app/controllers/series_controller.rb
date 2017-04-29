@@ -56,7 +56,7 @@ class SeriesController < ApplicationController
   def destroy
     @series.destroy
     respond_to do |format|
-      format.html { redirect_to series_url, notice: 'Serie was successfully destroyed.' }
+      format.html { redirect_to series_index_path, notice: 'Serie was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

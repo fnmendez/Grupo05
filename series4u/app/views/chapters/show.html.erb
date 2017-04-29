@@ -12,7 +12,7 @@
 
 <p>
   <strong>Owner:</strong>
-  <%= User.find(@chapter.user_id).username %>
+  <%= @chapter.user.username %>
 </p>
 
 <p>
@@ -22,61 +22,57 @@
 
 <p>
   <strong>Actors:</strong>
-    <% @actors.each do |chact| %>
-      <%= Actor.find(chact.actor_id).name %>
-      <%= link_to 'Destroy', chact, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% @chapter.actors.each do |actor| %>
+      <%= actor.name %>
+      <%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
 
 </p>
 
 <p>
   <strong>Directors:</strong>
-    <% @directors.each do |chdir| %>
-      <%= Director.find(chdir.director_id).name %>
-      <%= link_to 'Destroy', chdir, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% @chapter.directors.each do |director| %>
+      <%= director.name %>
+      <%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
 </p>
 
 <p>
   <strong>Your Rating:</strong>
-  <% @view_id = View.where(user_id: current_user.id, chapter_id: @chapter.id).take.id %>
-  <%= ChapterRating.where(view_id: @view_id).take.stars %>
+  <% unless @chapter.views.find_by(user: current_user.id).nil? %>
+    <%= @chapter.views.find_by(user: current_user.id).stars %>
+  <% end %>
 </p>
 
 
 <p>
   <strong>Rating Avg:</strong>
-  <% @ratings = [] %>
-  <% @views.each do |rv| %>
-    <% ChapterRating.where(view_id: rv.id).find_each.each do |chr| %>
-      <% @ratings << chr.stars %>
-    <% end %>
-  <% end %>
-  <%= @ratings.sum/@ratings.count %>
+  <%= @chapter.rating_average %>
 </p>
 
 <p>
   <strong>Reviews:</strong>
-  <table>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Content</th>
-        <th colspan="1"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @views.each do |rv| %>
+  <% if @chapter.views.count != 0 %>
+    <table>
+      <thead>
         <tr>
-          <td><%= User.find(rv.user_id).username %></td>
-          <td><%= ChapterReview.where(view_id: rv.id).take.content %></td>
+          <th>User</th>
+          <th>Content</th>
+          <th colspan="1"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @chapter.views.each do |rv| %>
+          <tr>
+            <td><%= rv.username %></td>
+            <td><%= rv.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </p>
 
-
-<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
-<%= link_to 'Back', chapters_path %>
+<%= link_to 'Edit', edit_chapter_path(@chapter) %> | 
+<%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', @chapter.season %>

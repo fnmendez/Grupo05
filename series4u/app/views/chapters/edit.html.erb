@@ -1,6 +1,5 @@
 <h1>Editing Chapter</h1>
 
-<%= render 'form', chapter: @chapter %>
+<%= render 'form', { url: {controller: "chapters", action: "update"} } %>
 
-<%= link_to 'Show', @chapter %> |
-<%= link_to 'Back', chapters_path %>
+<%= link_to 'Back', @chapter %> |
