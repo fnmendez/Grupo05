@@ -7,5 +7,7 @@
 	      <%= link_to s.title, story_path(s), class: 'button-primary' %>
 	    </div>
   <% end %>
-<%= link_to 'Create new story', '/stories/new', class: 'button-primary' %>
+<% if current_user.is_admin? %>
+  <%= link_to 'Create new story', new_story_path, class: 'button-primary' %>
+<% end %>
 </div>

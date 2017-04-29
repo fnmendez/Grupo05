@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  before_action :check_admin, only: [:new, :edit, :create, :destroy, :update]
 	def index
 		@stories = Story.all
 	end
@@ -17,7 +18,7 @@ class StoriesController < ApplicationController
 	def create 
   		@story = Story.new(story_params) 
   		if @story.save 
-    		redirect_to '/stories' 
+    		redirect_to stories_path
   		else 
     		flash[:errors] = @story.errors 
   		end 
@@ -26,13 +27,13 @@ class StoriesController < ApplicationController
   	def destroy
   		@story = Story.find(params[:id])
   		@story.destroy
-  		redirect_to '/stories'
+  		redirect_to stories_path
 	end
 
 	def update 
   		@story = Story.find(params[:id]) 
   		if @story.update_attributes(story_params) 
-    		redirect_to(:action => 'show', :id => @story.id) 
+        redirect_to story_path(@story)
   		else 
     		flash[:errors] = @story.errors
 		end 
@@ -41,5 +42,11 @@ class StoriesController < ApplicationController
 	private 
 	  	def story_params 
 	    	params.require(:story).permit(:title, :content, :date) 
-	  	end
+      end
+
+    def check_admin
+      unless current_user.is_admin?
+        redirect_to stories_path
+      end
+    end
 end
