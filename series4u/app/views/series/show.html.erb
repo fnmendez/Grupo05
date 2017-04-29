@@ -19,27 +19,29 @@
 
 <h2>Seasons: </h2>
 <%= link_to 'New Season', new_series_season_path(@serie) %>
-<table>
-  <thead>
-    <tr>
-      <th>
-        Number
-      </th>
-      <th>
-        Release_Date
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% Season.where(serie_id: @serie.id).find_each.each do |season| %>
+<% if Season.where(serie_id: @serie.id).exists? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= season.number %></td>
-        <td><%= season.release_date %></td>
-        <td><%= link_to 'Show', season %></td>
+        <th>
+          n°
+        </th>
+        <th>
+          Release_Date
+        </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% Season.where(serie_id: @serie.id).find_each.each do |season| %>
+        <tr>
+          <td><%= season.number %></td>
+          <td><%= season.release_date %></td>
+          <td><%= link_to 'Show', season %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <%= link_to 'Back', series_index_path %>
