@@ -25,7 +25,7 @@ class SeasonsController < ApplicationController
   # POST /seasons.json
   def create
     @season = Season.new(season_params)
-    @season.serie = Serie.find(params[:serie_id])
+    @season.serie = Serie.find(params[:series_id])
 
     respond_to do |format|
       if @season.save

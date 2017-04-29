@@ -14,11 +14,6 @@ class KidsController < ApplicationController
   def create
     @kid = User.new(kid_params)
     if @kid.save
-=begin
-      kiddie = Kid.new
-      kiddie.user_id = current_user.id
-      kiddie.kid_id = @kid.id
-=end
       kiddie = current_user.kids.build(kiddy_id: @kid.id)
       unless kiddie.save
         flash[:errors] = kiddie.errors

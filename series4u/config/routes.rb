@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
   resources :series, only: [:index, :show, :delete]
+  resources :series do
+    resources :seasons, shallow: true
+  end
 
   # devise_for :users
   devise_for :user, controllers: {
@@ -24,8 +27,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
-
-  resources :seasons
 
   resources :chapters
   resources :chapter_acts
