@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :series do
     resources :seasons, shallow: true
   end
+  resources :seasons do
+    resources :chapters, shallow: true
+      end
 
   # devise_for :users
   devise_for :user, controllers: {
@@ -28,9 +31,8 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#admin_show'
   delete 'users' => 'users#destroy', as: :destroy_users
 
-  resources :chapters
-  resources :chapter_acts
-  resources :chapter_directeds
+  resources :chapter_acts, only: [:delete]
+  resources :chapter_directeds, only: [:delete]
 
   resources :kids, only: [:index, :show, :new, :create]
   resources :stories
