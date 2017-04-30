@@ -1,0 +1,13 @@
+<% provide :title, 'Welcome' %>
+<h1 id="stories-title">News</h1>
+<div class="divider"></div>
+<div id="stories">
+	<% @stories.each do |s| %>
+	    <div class="info-value">
+	      <%= link_to s.title, story_path(s), class: 'button-primary' %>
+	    </div>
+  <% end %>
+<% if user_signed_in? && current_user.is_admin? %>
+  <%= link_to 'Create new story', new_story_path, class: 'button-primary' %>
+<% end %>
+</div>

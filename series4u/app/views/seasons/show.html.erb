@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1>Season n°: <%= @season.number %> </h1>
+</p>
+
+<p>
+  <strong>From Serie:</strong>
+  <%= @season.serie.title %>
+</p>
+
+
+<p>
+  <strong>Release date:</strong>
+  <%= @season.release_date %>
+</p>
+
+<% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
+  <%= link_to 'Edit', edit_season_path(@season) %> |
+  <%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<p>
+  <h2>Chapters: </h2>
+  <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
+    <%= link_to 'New Chapter', new_season_chapter_path(@season) %>
+  <% end %>
+  <% if @season.chapters.exists? %>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            n°
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Summary
+          </th>
+          <th>
+            Added by
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @n = 1 %>
+        <% @season.chapters.each do |chapter| %>
+          <tr>
+            <td><%= @n %></td>
+            <td><%= chapter.title %></td>
+            <td><%= chapter.summary %></td>
+            <td><%= chapter.user.username %></td>
+            <td><%= link_to 'Show', chapter %></td>
+          </tr>
+          <%@n = @n + 1%>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</p>
+
+<%= link_to 'Back', @season.serie %>

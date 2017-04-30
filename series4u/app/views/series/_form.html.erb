@@ -1,0 +1,21 @@
+<%= form_for @serie, url: url do |form| %>
+
+  <div class="input-field">
+    <%= form.label :title, 'Title:' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :country, 'Country:' %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :genre, 'Genre:' %>
+    <%= form.text_field :genre %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

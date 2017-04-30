@@ -1,0 +1,16 @@
+<%= form_for @chapter, url: url do |form| %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :chapter_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_area :summary, id: :chapter_summary %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

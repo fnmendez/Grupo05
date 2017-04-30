@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @serie.title %></h1>
+
+<div class="serie-atrib">
+  Genre: <%= @serie.genre %>
+</div>
+<div class="serie-atrib">
+  Added by: <%= @serie.user.username %>
+</div>
+<div class="serie-atrib">
+  Country: <%= @serie.country %>
+</div>
+
+<% if user_signed_in? && (!@serie.public? || current_user.is_admin?) %>
+    <td><%= link_to 'Edit', edit_series_path(@serie) %></td>
+    <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+<p>
+<h2>Seasons: </h2>
+<%= link_to 'New Season', new_series_season_path(@serie) %>
+<% if @serie.seasons.exists? %>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          n°
+        </th>
+        <th>
+          Release_Date
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @serie.seasons.each do |season| %>
+        <tr>
+          <td><%= season.number %></td>
+          <td><%= season.release_date %></td>
+          <td><%= link_to 'Show', season %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+</p>
+
+<%= link_to 'Back', series_index_path %>

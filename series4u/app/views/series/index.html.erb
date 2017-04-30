@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Series</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Title
+      </th>
+      <th>
+        Country
+      </th>
+      <th>
+        Genre
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @series.each do |serie| %>
+      <tr>
+        <td><%= serie.title %></td>
+        <td><%= serie.country %></td>
+        <td><%= serie.genre %></td>
+        <td><%= link_to 'Show', serie %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+  <%= link_to 'New Series', new_series_path %>
+<% end %>

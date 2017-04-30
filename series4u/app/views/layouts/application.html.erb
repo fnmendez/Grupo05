@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Series4u</title>
+    <title>
+
+      <% if content_for? :title %>
+        Series4u | <%= yield :title %>
+      <% else %>
+        Series4u
+      <% end %>
+    </title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +16,19 @@
   </head>
 
   <body>
+  <!--
+    <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+    <% end %>
+
+    <% unless user_signed_in? %>
+      <p><%=  link_to 'Sign up', new_user_registration_path%></p>
+      <p><%=  link_to 'Sign in', new_user_session_path%></p>
+    <% end %>
+      -->
+
+    <%= render partial: 'common/navbar' %>
     <%= yield %>
   </body>
+
 </html>

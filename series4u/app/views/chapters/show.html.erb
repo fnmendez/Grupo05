@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @chapter.title %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @chapter.summary %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @chapter.user.username %>
+</p>
+
+<p>
+  <strong>Season:</strong>
+  <%= @chapter.season_id %>
+</p>
+
+<p>
+  <strong>Actors:</strong>
+    <% @chapter.actors.each do |actor| %>
+      <%= actor.name %>
+      <%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% end %>
+
+</p>
+
+<p>
+  <strong>Directors:</strong>
+    <% @chapter.directors.each do |director| %>
+      <%= director.name %>
+      <%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% end %>
+</p>
+
+<% if user_signed_in? %>
+  <p>
+    <strong>Your Rating:</strong>
+    <% unless @chapter.views.find_by(user: current_user.id).nil? %>
+      <%= @chapter.views.find_by(user: current_user.id).stars %>
+    <% end %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Rating Avg:</strong>
+  <%= @chapter.rating_average %>
+</p>
+
+<p>
+  <strong>Reviews:</strong>
+  <% if @chapter.views.count != 0 %>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Content</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @chapter.views.each do |rv| %>
+          <tr>
+            <td><%= rv.username %></td>
+            <td><%= rv.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</p>
+
+<% if user_signed_in? && (current_user.is_admin? || @chapter.season.serie.user == current_user) %>
+  <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+  <%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
+<%= link_to 'Back', @chapter.season %>
