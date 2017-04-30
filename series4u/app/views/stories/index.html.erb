@@ -1,13 +1,14 @@
 <% provide :title, 'Welcome' %>
-<h1 id="stories-title">News</h1>
+<h1 align="center" id="stories-title">News</h1>
 <div class="divider"></div>
-<div id="stories">
+<ul class="list-group" id='stories'>
 	<% @stories.each do |s| %>
-	    <div class="info-value">
-	      <%= link_to s.title, story_path(s), class: 'button-primary' %>
-	    </div>
+		<li class="list-group-item"><%= link_to s.title, story_path(s) %></li>
   <% end %>
+</ul>
+
+
 <% if user_signed_in? && current_user.is_admin? %>
-  <%= link_to 'Create new story', new_story_path, class: 'button-primary' %>
+	<%= link_to 'Create new story', new_story_path %>
 <% end %>
-</div>
+
