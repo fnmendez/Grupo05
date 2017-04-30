@@ -74,7 +74,7 @@
   <% end %>
 </p>
 
-<% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
+<% if user_signed_in? && (current_user.is_admin? || @chapter.season.serie.user == current_user) %>
   <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
   <%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
