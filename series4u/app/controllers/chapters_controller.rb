@@ -70,7 +70,7 @@ class ChaptersController < ApplicationController
 
   def share
     @chapter = Chapter.find(params[:id])
-    ChapterMailer.share_chapter_mail(@chapter, current_user, params[:share][:email]).deliver_now
+    ChapterMailer.share_chapter_mail(@chapter, current_user, params[:share][:email]).deliver_later
     redirect_to @chapter
   end
 
