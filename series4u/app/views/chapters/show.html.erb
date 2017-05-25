@@ -76,6 +76,11 @@
 
 <% if user_signed_in? && (current_user.is_admin? || @chapter.season.serie.user == current_user) %>
   <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+  <%= form_for :share, url: share_chapter_path do |form| %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.submit 'Share' %>
+  <% end %>
   <%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', @chapter.season %>
