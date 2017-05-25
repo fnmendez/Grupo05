@@ -1,9 +1,9 @@
 <p>
-  Greetings!
+  Hello!
 </p>
 
 <p>
-  <%= @user.full_name %> thinks you might like <%= @chapter.title %>,
+  <%= @user.full_name %> thinks you might like <%= @chapter.title %>, from series <%= @chapter.season.serie.title %>
   you can check it out here: <%= link_to 'See chapter', @chapter %>
 </p>
 
