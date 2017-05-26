@@ -68,6 +68,12 @@ class ChaptersController < ApplicationController
     end
   end
 
+  def share
+    @chapter = Chapter.find(params[:id])
+    ChapterMailer.share_chapter_mail(@chapter, current_user, params[:share][:email]).deliver_later
+    redirect_to @chapter
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chapter

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post '/series/new' => 'series#create'
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
+  post '/chapters/:id/share' => 'chapters#share', as: :share_chapter
+  post '/series/:id/share' => 'series#share', as: :share_serie
   resources :series, only: [:index, :show, :delete]
   resources :series do
     resources :seasons, shallow: true
@@ -35,7 +37,7 @@ Rails.application.routes.draw do
       get 'promote'
     end
   end
-  
+
   resources :chapter_acts, only: [:delete]
   resources :chapter_directeds, only: [:delete]
 
