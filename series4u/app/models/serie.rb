@@ -20,4 +20,22 @@ class Serie < ApplicationRecord
   def self.destroy_from(creator)
     where(user: creator).destroy_all
   end
+    def self.search_by_title(t, viewer)
+    @viewable = self.viewable_series(viewer) 
+    @matched = where("title LIKE ?","%#{t}%")
+    @viewable & @matched
+  end
+
+  def self.search_by_genre(g, viewer)
+    @viewable = self.viewable_series(viewer)
+    @matched = where("genre LIKE ?","%#{g}%")
+    @viewable & @matched
+  end
+
+  def self.search(t, g, viewer)
+    @by_title = self.search_by_title(t, viewer)
+    @by_genre = self.search_by_genre(g, viewer)
+    @by_title & @by_genre
+
+  end
 end
