@@ -9,15 +9,4 @@ class Chapter < ApplicationRecord
   validates :title, presence: true
   validates :user, presence: true
   validates :season, presence: true
-
-  def rating_average
-    if views.count == 0
-      return 0
-    end
-    total = 0
-    views.each do |view|
-      total+= view.stars
-    end
-    total/views.count
-  end
 end
