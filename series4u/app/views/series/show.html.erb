@@ -48,5 +48,10 @@
 <%= link_to 'Back', series_index_path %>
 <% if user_signed_in? && (!@serie.public? || current_user.is_admin?) %>
     <td><%= link_to 'Edit', edit_series_path(@serie) %></td>
+    <%= form_for :share, url: share_serie_path do |form| %>
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+        <%= form.submit 'Share' %>
+    <% end %>
     <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>

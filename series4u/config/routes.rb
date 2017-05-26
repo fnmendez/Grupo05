@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
   post '/chapters/:id/share' => 'chapters#share', as: :share_chapter
+  post '/series/:id/share' => 'series#share', as: :share_serie
   resources :series, only: [:index, :show, :delete]
   resources :series do
     resources :seasons, shallow: true
