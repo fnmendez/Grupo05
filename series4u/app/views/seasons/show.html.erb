@@ -9,7 +9,6 @@
   <%= @season.serie.title %>
 </p>
 
-
 <p>
   <strong>Release date:</strong>
   <%= @season.release_date %>
@@ -19,6 +18,7 @@
   <%= link_to 'Edit', edit_season_path(@season) %> |
   <%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+
 <p>
   <h2>Chapters: </h2>
   <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>

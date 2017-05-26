@@ -1,0 +1,11 @@
+<%= form_for @chapter_review, url: url do |form| %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :chapter_review_content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
