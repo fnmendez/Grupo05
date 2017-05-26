@@ -61,6 +61,12 @@ class SeriesController < ApplicationController
     end
   end
 
+  def share
+    @serie = Serie.find(params[:id])
+    SerieMailer.share_serie_mail(@serie, current_user, params[:share][:email]).deliver_later
+    redirect_to @serie
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_series
