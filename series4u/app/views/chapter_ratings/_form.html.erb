@@ -1,0 +1,11 @@
+<%= form_for @chapter_rating, url: url do |form| %>
+
+  <div class="field">
+    <%= form.label :stars %>
+    <%= form.number_field :stars, id: :chapter_rating_stars, min: 0, max: 5 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

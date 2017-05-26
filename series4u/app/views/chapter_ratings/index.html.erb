@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Chapter Ratings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stars</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chapter_ratings.each do |chapter_rating| %>
+      <tr>
+        <td><%= chapter_rating.stars %></td>
+        <td><%= link_to 'Show', chapter_rating %></td>
+        <td><%= link_to 'Edit', edit_chapter_rating_path(chapter_rating) %></td>
+        <td><%= link_to 'Destroy', chapter_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chapter Rating', new_chapter_rating_path %>

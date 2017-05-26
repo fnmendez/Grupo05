@@ -8,9 +8,23 @@ Rails.application.routes.draw do
   resources :series do
     resources :seasons, shallow: true
   end
+
   resources :seasons do
     resources :chapters, shallow: true
   end
+
+  resources :chapters do
+    resources :views, shallow: true
+  end
+  resources :chapters do
+    resources :chapter_ratings, shallow: true
+  end
+  resources :chapters do
+    resources :chapter_reviews, shallow: true
+  end
+
+  resources :chapter_acts, only: [:delete]
+  resources :chapter_directeds, only: [:delete]
 
   # devise_for :users
   devise_for :user, controllers: {
@@ -35,9 +49,6 @@ Rails.application.routes.draw do
       get 'promote'
     end
   end
-  
-  resources :chapter_acts, only: [:delete]
-  resources :chapter_directeds, only: [:delete]
 
   resources :kids, only: [:index, :show, :new, :create]
   resources :stories
