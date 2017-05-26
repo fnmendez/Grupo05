@@ -1,0 +1,15 @@
+<% provide :title, 'Advanced' %>
+<h1 align="center" id="search-title">Advanced Search</h1>
+<%= form_tag results_path, method: 'get' do %>
+<div class="field" align="center">
+	Título: <%= text_field_tag :title, params[:title], placeholder: 'Introduzca título' %>
+</div>
+<div class="field" align="center">
+	Género: <%= text_field_tag :genre, params[:genre], placeholder: 'Introduzca género'%>
+</div>
+<div class="field" align="center">
+	<%= button_tag(type: "submit", class: "btn btn-default", margin:'auto', :name => nil) do %>
+	Search
+	<% end %>
+</div>
+<% end %>
