@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post '/series/new' => 'series#create'
   get '/series/:id/edit' => 'series#edit', as: :edit_series
   patch '/series/:id' => 'series#update'
+  get '/search'=> 'searches#index'
+  get '/search/results' => 'searches#results', as: :results
   resources :series, only: [:index, :show, :delete]
   resources :series do
     resources :seasons, shallow: true
