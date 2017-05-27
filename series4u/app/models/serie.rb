@@ -3,6 +3,8 @@ class Serie < ApplicationRecord
   has_many :seasons, dependent: :destroy
   has_many :chapters, through: :seasons, dependent: :destroy
 
+  mount_uploader :picture, SeriePictureUploader
+
   def public?
     self.user.is_admin?
   end

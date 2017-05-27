@@ -5,7 +5,7 @@
 <% @series.each do |serie| %>
   <div class="col-sm-5 col-md-4">
     <div class="thumbnail">
-      <img src="http://www.tshirtvortex.net/wp-content/uploads/Sons-of-Anarchy-Grim-Reaper-T-Shirt.jpg" alt="Imagen" width="300" height="300">
+      <%= image_tag serie.picture.url if serie.picture? %>
       <div class="caption">
         <h3><%= serie.title %></h3>
         <p>Country: <%= serie.country %></p>
