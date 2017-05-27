@@ -24,6 +24,7 @@
         <td><%= serie.title %></td>
         <td><%= serie.country %></td>
         <td><%= serie.genre %></td>
+        <td><%= image_tag serie.picture.url if serie.picture? %></td>
         <td><%= link_to 'Show', serie %></td>
       </tr>
     <% end %>

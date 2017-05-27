@@ -75,6 +75,6 @@ class SeriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
-      params.require(:serie).permit(:title, :country, :genre).merge({user: current_user})
+      params.require(:serie).permit(:title, :country, :genre, :picture).merge({user: current_user})
     end
 end
