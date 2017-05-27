@@ -10,14 +10,23 @@ class Chapter < ApplicationRecord
   validates :user, presence: true
   validates :season, presence: true
 
-  def rating_average
-    if views.count == 0
-      return 0
+  def self.viewable_chaps(viewer)
+    if viewer.nil?
+      return all.select{ |chap| chap.season.serie.public? }
     end
-    total = 0
-    views.each do |view|
-      total+= view.stars
+    if viewer.is_admin?
+      return all
     end
-    total/views.count
+    all.select{ |chap| chap.season.serie.public? || chap.season.serie.user == viewer }
+  end
+  
+  def self.search_by_title(t)
+    where("title LIKE ?","%#{t}%")
+  end
+
+  def self.search(t, viewer)
+    @viewable = viewable_chaps(viewer)
+    @by_title = search_by_title(t)
+    @viewable & @by_title
   end
 end

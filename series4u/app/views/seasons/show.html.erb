@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <div class="panel panel-default">
   <div class="panel-heading"><h1><%= @season.serie.title %>: Season <%= @season.number %></h1></div>
   <div class="panel-body">
@@ -14,6 +15,7 @@
   <%= link_to 'Edit', edit_season_path(@season) %> |
   <%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+
 <p>
   <h2>Chapters: </h2>
   <% if @season.chapters.exists? %>
