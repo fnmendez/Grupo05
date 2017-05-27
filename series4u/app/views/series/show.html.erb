@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><h1><%= @serie.title %></h1></div>
+  <div class="panel-heading"><h1><%= @serie.title %></h1> <%= image_tag @serie.picture.url if @serie.picture? %></div>
   <div class="panel-body">
     <div class="serie-atrib">
       Genre: <%= @serie.genre %>
