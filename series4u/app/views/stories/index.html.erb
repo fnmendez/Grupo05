@@ -9,6 +9,7 @@
 
 
 <% if user_signed_in? && current_user.is_admin? %>
-	<%= link_to 'Create new story', new_story_path %>
+	<div><%= button_to "Create new story", new_story_path, :id => "new-story-btn",
+      :class => "btn btn-warning", :method => :get %></div>
 <% end %>
 
