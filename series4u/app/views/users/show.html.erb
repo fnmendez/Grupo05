@@ -29,8 +29,10 @@
   </div>
 </div>
 
-<div><%= link_to "Edit profile", edit_user_registration_path %></div>
+<div><%= button_to "Edit profile", edit_user_registration_path, :id => "edit-user-registration",
+      :class => "btn btn-default", :method => :get %></div>
 
 <% unless current_user.is_kid? %>
-    <div><%= link_to "Manage kids", kids_path %></div>
+	<div><%= button_to "Manage kids", kids_path, :id => "kids-path",
+      :class => "btn btn-default", :method => :get %></div>
 <% end %>
