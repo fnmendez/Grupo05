@@ -1,36 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <h1 align="center">Series</h1>
+<div class="row">
+<% @series.each do |serie| %>
+  <div class="col-sm-5 col-md-4">
+    <div class="thumbnail">
+      <img src="http://www.tshirtvortex.net/wp-content/uploads/Sons-of-Anarchy-Grim-Reaper-T-Shirt.jpg" alt="Imagen" width="300" height="300">
+      <div class="caption">
+        <h3><%= serie.title %></h3>
+        <p>Country: <%= serie.country %></p>
+        <!-- <p>Genre: <%= serie.genre %></p> -->
+        <p><%= button_to "More info", serie, :id => "open-contacts-dialog-btn",
+      :class => "btn btn-primary", :method => :get %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
 
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>
-        Title
-      </th>
-      <th>
-        Country
-      </th>
-      <th>
-        Genre
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @series.each do |serie| %>
-      <tr>
-        <td><%= serie.title %></td>
-        <td><%= serie.country %></td>
-        <td><%= serie.genre %></td>
-        <td><%= link_to 'Show', serie %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 <% if user_signed_in? %>
-  <%= link_to 'New Series', new_series_path %>
+  <div align="center"><%= button_to "New Series", new_series_path, :id => "new-series-btn",
+      :class => "btn btn-warning", :method => :get %></div>
 <% end %>

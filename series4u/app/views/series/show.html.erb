@@ -18,7 +18,8 @@
 
 <p>
 <h2>Seasons: </h2>
-<%= link_to 'New Season', new_series_season_path(@serie) %>
+<div><%= button_to "New Season", new_series_season_path(@serie), :id => "new-series-season-btn",
+      :class => "btn btn-default", :method => :get %></div>
 <% if @serie.seasons.exists? %>
   <table class="table">
     <thead>
@@ -37,7 +38,8 @@
         <tr>
           <td><%= season.number %></td>
           <td><%= season.release_date %></td>
-          <td><%= link_to 'Show', season %></td>
+          <td><%= button_to "Show", season, :id => "show-season-btn",
+      :class => "btn btn-warning", :method => :get %></td>
         </tr>
       <% end %>
     </tbody>
@@ -45,13 +47,18 @@
 <% end %>
 </p>
 
-<%= link_to 'Back', series_index_path %>
+
 <% if user_signed_in? && (!@serie.public? || current_user.is_admin?) %>
-    <td><%= link_to 'Edit', edit_series_path(@serie) %></td>
     <%= form_for :share, url: share_serie_path do |form| %>
         <%= form.label :email %>
         <%= form.text_field :email %>
         <%= form.submit 'Share' %>
     <% end %>
-    <td><%= link_to 'Destroy', @serie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  	<%= button_to "Edit", edit_series_path(@serie), :id => "edit-series-btn",
+      :class => "btn btn-default", :method => :get %>
+    <%= button_to "Destroy", @serie, :id => "delete-series-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
+
 <% end %>
+<div><%= button_to "Back", series_index_path, :id => "backs-series-btn",
+      :class => "btn btn-default", :method => :get %></div>

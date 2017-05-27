@@ -1,26 +1,38 @@
-<h1><%= current_user.full_name %>'s profile</h1>
+<h1 align="center"><%= current_user.full_name %>'s profile</h1>
 <% if current_user.is_kid? %>
-  <h2> <%= current_user.parent.full_name %>'s Kid account </h2>
+  <h2 align="center"> <%= current_user.parent.full_name %>'s Kid account </h2>
 <% end %>
-
-<div>
-  Username: <%= current_user.username %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Username</h3>
+  </div>
+  <div class="panel-body">
+    <%= current_user.username %>
+  </div>
+  <div class="panel-heading">
+    <h3 class="panel-title">Email</h3>
+  </div>
+    <div class="panel-body">
+    <%= current_user.email %>
+  </div>
+  <div class="panel-heading">
+    <h3 class="panel-title">Full name</h3>
+  </div>
+    <div class="panel-body">
+    <%= current_user.full_name.nil? ? 'Not specified' : current_user.full_name %>
+  </div>
+  <div class="panel-heading">
+    <h3 class="panel-title">Description</h3>
+  </div>
+    <div class="panel-body">
+    <%= current_user.description.nil? ? 'Not specified' : current_user.description %>
+  </div>
 </div>
 
-<div>
-  Email: <%= current_user.email %>
-</div>
-
-<div>
-  Full name: <%= current_user.full_name.nil? ? 'Not specified' : current_user.full_name %>
-</div>
-
-<div>
-  Description: <%= current_user.description.nil? ? 'Not specified' : current_user.description %>
-</div>
-
-<div><%= link_to "Edit profile", edit_user_registration_path %></div>
+<div><%= button_to "Edit profile", edit_user_registration_path, :id => "edit-user-registration",
+      :class => "btn btn-default", :method => :get %></div>
 
 <% unless current_user.is_kid? %>
-    <div><%= link_to "Manage kids", kids_path %></div>
+	<div><%= button_to "Manage kids", kids_path, :id => "kids-path",
+      :class => "btn btn-default", :method => :get %></div>
 <% end %>
