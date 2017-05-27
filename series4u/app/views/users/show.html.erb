@@ -8,6 +8,10 @@
 </div>
 
 <div>
+  <%= image_tag current_user.picture.url if current_user.picture? %>
+</div>
+
+<div>
   Email: <%= current_user.email %>
 </div>
 
