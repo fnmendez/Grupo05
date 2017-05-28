@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :inverse_kids, class_name: 'Kid', foreign_key: 'kiddy_id'
   has_many :parents, through: :inverse_kids, source: :user
 
+  mount_uploader :picture, ProfilePictureUploader
+
   validates :username,
             presence: true,
             uniqueness: { case_sensitive: false }

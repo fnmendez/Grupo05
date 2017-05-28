@@ -1,81 +1,127 @@
 <p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading"><h1>Title: <%= @chapter.title %></h1>
+    <div>
+      <% if @view.exists? %>
+      <%= button_to "Mark as unseen", @view.first, :id => "mark-unseen-btn",
+          :class => "btn btn-warning", :method => :delete %>
+      <% else %>
+      <%= button_to "Mark as seen", new_chapter_view_path(@chapter), :id => "mark-seen-btn",
+          :class => "btn btn-warning", :method => :get %>
+      <% end %>
+    
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="serie-atrib">
+      <% if @view.exists? %>
+      <strong>Status</strong>: Viewed. 
+    <% else %>
+      <strong>Status</strong>: Not seen yet.
+    <% end %>
+    </div>
+    <div class="serie-atrib">
+      <strong>Summary</strong>: <%= @chapter.summary %>
+    </div>
+    <div class="serie-atrib">
+      <strong>Added by</strong>: <%= @chapter.user.username %>
+    </div>
+    <div class="serie-atrib">
+    <strong>Season</strong>: <%= @chapter.season.number %>
+    </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @chapter.title %>
-</p>
-
-<p>
-  <strong>Summary:</strong>
-  <%= @chapter.summary %>
-</p>
-
-<p>
-  <strong>Owner:</strong>
-  <%= @chapter.user.username %>
-</p>
-
-<p>
-  <strong>Season:</strong>
-  <%= @chapter.season_id %>
-</p>
-
-<p>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Additional info</h4></div>
+  <div class="panel-body">
+    <div class="serie-atrib">
   <strong>Actors:</strong>
     <% @chapter.actors.each do |actor| %>
       <%= actor.name %>
       <%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
-
-</p>
-
-<p>
-  <strong>Directors:</strong>
+    </div>
+    <div class="serie-atrib">
+      <strong>Directors:</strong>
     <% @chapter.directors.each do |director| %>
       <%= director.name %>
       <%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %>,
     <% end %>
-</p>
-
-<% if user_signed_in? %>
-  <p>
-    <strong>Your Rating:</strong>
-    <% unless @chapter.views.find_by(user: current_user.id).nil? %>
-      <%= @chapter.views.find_by(user: current_user.id).stars %>
+    </div>
+    <% if user_signed_in? %>
+    <div class="serie-atrib">
+      <strong>Your Rating:</strong>
+      <% if @chapter_rating.exists? %>
+        <%= @chapter_rating.first.stars %>
+        <%= link_to 'Edit', edit_chapter_rating_path(@chapter_rating.first) %>
+      <% elsif @view.exists? %>
+        <%= link_to 'Rate Chapter', new_chapter_chapter_rating_path(@chapter) %>
+      <% else %>
+        In order to rate this chapter, you have to mark it as seen.
+      <% end %>
+    </div>
     <% end %>
-  </p>
-<% end %>
-
-<p>
-  <strong>Rating Avg:</strong>
-  <%= @chapter.rating_average %>
-</p>
-
-<p>
-  <strong>Reviews:</strong>
-  <% if @chapter.views.count != 0 %>
-    <table>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Content</th>
-          <th colspan="1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @chapter.views.each do |rv| %>
+    <div class="serie-atrib">
+      <strong>Rating Avg:</strong>
+      <% @total = 0 %>
+      <% @chapter_ratings.each do |r| %>
+        <% @total += r.stars %>
+      <% end %>
+      <%= @total %>
+    </div>
+    <div class="serie-atrib">
+<% if user_signed_in? %>
+    <strong>Reviews:</strong>
+    <% if @view.exists? %>
+      <%= link_to 'New Review', new_chapter_chapter_review_path(@chapter) %>
+    <% else %>
+      In order to create a review for this chapter, you have to mark it as seen.
+    <% end %>
+    <% if @chapter_reviews.exists? %>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= rv.username %></td>
-            <td><%= rv.content %></td>
+            <th>
+              User
+            </th>
+            <th>
+              Content
+            </th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
-</p>
+        </thead>
+        <tbody>
+          <% @chapter_reviews.each do |rv| %>
+            <tr>
+              <td><%= rv.view.user.username %></td>
+              <td><%= rv.content %></td>
+              <% if rv.view.user == current_user %>
+                <td><%= link_to 'Edit', edit_chapter_review_path(rv) %></td>
+              <% end %>
+              <% if rv.view.user == current_user || current_user.is_admin? %>
+                <td><%= link_to 'Destroy', rv, method: :delete %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+<% end %>
+    </div>
+      </div>
+    </div>
+
 
 <% if user_signed_in? && (current_user.is_admin? || @chapter.season.serie.user == current_user) %>
-  <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
-  <%= link_to 'Destroy', @chapter, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= form_for :share, url: share_chapter_path do |form| %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.submit 'Share' %>
+  <% end %>
+  <%= button_to "Edit", edit_chapter_path(@chapter), :id => "edit-chapter-btn",
+      :class => "btn btn-default", :method => :get %>
+  <%= button_to "Destroy", @chapter, :id => "delete-chapter-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', @chapter.season %>
+<div><%= button_to "Back", @chapter.season, :id => "backs-chapters-btn",
+      :class => "btn btn-default", :method => :get %></div>
