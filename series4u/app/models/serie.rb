@@ -1,5 +1,6 @@
 class Serie < ApplicationRecord
   belongs_to :user
+  has_many :serie_reviews, dependent: :destroy
   has_many :seasons, dependent: :destroy
   has_many :chapters, through: :seasons, dependent: :destroy
 
@@ -23,7 +24,7 @@ class Serie < ApplicationRecord
     where(user: creator).destroy_all
   end
     def self.search_by_title(t, viewer)
-    @viewable = self.viewable_series(viewer) 
+    @viewable = self.viewable_series(viewer)
     @matched = where("title LIKE ?","%#{t}%")
     @viewable & @matched
   end
