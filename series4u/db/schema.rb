@@ -97,6 +97,11 @@ ActiveRecord::Schema.define(version: 20170624052231) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer "number"
     t.date "release_date"
@@ -183,6 +188,8 @@ ActiveRecord::Schema.define(version: 20170624052231) do
     t.string "facebook_name"
     t.string "username"
     t.string "picture"
+    t.string "provider"
+    t.string "uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

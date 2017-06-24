@@ -19,14 +19,23 @@
     <div class="serie-atrib">
       Country: <%= @serie.country %>
     </div>
+
+    <% unless @imdb_result.nil? %>
+      <div class="imdb-results">
+        <div class="serie-atrib">
+          IMDB Rating: <%= @imdb_result.rating %>/10
+        </div>
+        <%= image_tag(@imdb_result.poster_url, size: 250)%>
+      </div>
+    <% end %>
   </div>
 </div>
-
 
 <p>
   <h3>Reviews:</h3>
   <% if user_signed_in? %>
-    <%= link_to 'New Review', new_series_serie_review_path(@serie) %>
+  	<div><%= button_to "New Review", new_series_serie_review_path(@serie), :id => "new-series-review-btn",
+      :class => "btn btn-default", :method => :get %></div>
   <% else %>
     In order to create a review for this series, you have to sign in.
   <% end %>

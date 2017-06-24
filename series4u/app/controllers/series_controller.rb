@@ -13,6 +13,12 @@ class SeriesController < ApplicationController
     @serie = Serie.find(params[:id])
     @favorite_serie = FavoriteSerie.where(serie: @serie, user: current_user)
     @serie_reviews = SerieReview.where(serie: @serie)
+    imdb = FilmBuff.new(ssl:false)
+    search = imdb.search_for_title(@serie.title, types: %w(title_popular))
+    @imdb_result = nil
+    if search.length > 0
+      @imdb_result = imdb.look_up_id(search[0][:imdb_id])
+    end
   end
 
   # GET /series/new
