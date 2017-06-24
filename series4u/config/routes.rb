@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/search/results' => 'searches#results', as: :results
   post '/chapters/:id/share' => 'chapters#share', as: :share_chapter
   post '/series/:id/share' => 'series#share', as: :share_serie
+  get '/favorites' => 'favorites#show'
+
   resources :series, only: [:index, :show, :delete]
   resources :series do
     resources :seasons, shallow: true
