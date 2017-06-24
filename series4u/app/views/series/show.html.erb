@@ -19,7 +19,8 @@
 <p>
   <h3>Reviews:</h3>
   <% if user_signed_in? %>
-    <%= link_to 'New Review', new_series_serie_review_path(@serie) %>
+  	<div><%= button_to "New Review", new_series_serie_review_path(@serie), :id => "new-series-review-btn",
+      :class => "btn btn-default", :method => :get %></div>
   <% else %>
     In order to create a review for this series, you have to sign in.
   <% end %>

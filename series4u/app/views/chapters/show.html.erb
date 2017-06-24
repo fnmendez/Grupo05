@@ -51,17 +51,21 @@
     </div>
     <% if user_signed_in? %>
     <div class="serie-atrib">
-      <strong>Your Rating:</strong>
+    <table class='table-fixed'>
+      <tr><strong>Your Rating:</strong></tr>
       <% if @chapter_rating.exists? %>
-        <%= @chapter_rating.first.stars %>
-        <%= link_to 'Edit', edit_chapter_rating_path(@chapter_rating.first) %>
+        <tr><%= @chapter_rating.first.stars %></tr>
+        <tr><%= button_to "Edit", edit_chapter_rating_path(@chapter_rating.first), :id => "edit-chapter-rating-btn",
+      :class => "btn btn-default btn-sm", :method => :get %></tr>
       <% elsif @view.exists? %>
-        <%= link_to 'Rate Chapter', new_chapter_chapter_rating_path(@chapter) %>
+            <tr><%= button_to "Rate Chapter", new_chapter_chapter_rating_path(@chapter), :id => "rate-chapter-btn",
+      :class => "btn btn-default btn-sm", :method => :get %></tr>
       <% else %>
         In order to rate this chapter, you have to mark it as seen.
       <% end %>
     </div>
     <% end %>
+    </table>
     <div class="serie-atrib">
       <strong>Rating Avg:</strong>
       <% @total = 0 %>
@@ -72,12 +76,15 @@
     </div>
     <div class="serie-atrib">
 <% if user_signed_in? %>
-    <strong>Reviews:</strong>
+  <table class='table-fixed'>
+    <tr><strong>Reviews:</strong></tr>
     <% if @view.exists? %>
-      <%= link_to 'New Review', new_chapter_chapter_review_path(@chapter) %>
+      <tr><%= button_to "New Review", new_chapter_chapter_review_path(@chapter), :id => "new-chapter-review-btn",
+      :class => "btn btn-default btn-sm", :method => :get %></tr>
     <% else %>
       In order to create a review for this chapter, you have to mark it as seen.
     <% end %>
+    </table>
     <% if @chapter_reviews.exists? %>
       <table class="table">
         <thead>
@@ -118,10 +125,14 @@
     <%= form.text_field :email %>
     <%= form.submit 'Share' %>
   <% end %>
-  <%= button_to "Edit", edit_chapter_path(@chapter), :id => "edit-chapter-btn",
-      :class => "btn btn-default", :method => :get %>
-  <%= button_to "Destroy", @chapter, :id => "delete-chapter-btn",
-      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
+  <table class='table-fixed'>
+    <tr>
+  <td><%= button_to "Edit", edit_chapter_path(@chapter), :id => "edit-chapter-btn",
+      :class => "btn btn-default", :method => :get %></td>
+  <td><%= button_to "Destroy", @chapter, :id => "delete-chapter-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  </table>
 <% end %>
 <div><%= button_to "Back", @chapter.season, :id => "backs-chapters-btn",
       :class => "btn btn-default", :method => :get %></div>

@@ -12,8 +12,12 @@
 
 
 <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
-  <%= link_to 'Edit', edit_season_path(@season) %> |
-  <%= link_to 'Destroy', @season, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<div>
+  	<%= button_to "Edit", edit_season_path(@season), :id => "edit-season-btn",
+      :class => "btn btn-default", :method => :get %>
+    <%= button_to "Destroy", @season, :id => "delete-season-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
 <% end %>
 
 <p>
@@ -45,7 +49,8 @@
             <td><%= chapter.title %></td>
             <td><%= chapter.summary %></td>
             <td><%= chapter.user.username %></td>
-            <td><%= link_to 'Show', chapter %></td>
+            <td><%= button_to "Show", chapter, :id => "show-chapter-btn",
+      :class => "btn btn-warning", :method => :get %></td>
           </tr>
           <%@n = @n + 1%>
         <% end %>
@@ -56,8 +61,10 @@
 
 <div>
 <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
-  <%= link_to 'New Chapter', new_season_chapter_path(@season) %>
+	<%= button_to "New Chapter", new_season_chapter_path(@season), :id => "new-season-chapter-btn",
+      :class => "btn btn-default", :method => :get %>
 <% end %>
 </div>
-<%= link_to 'Back', @season.serie %>
+<div><%= button_to "Back", @season.serie, :id => "back-seasons-btn",
+      :class => "btn btn-default", :method => :get %></div>
 
