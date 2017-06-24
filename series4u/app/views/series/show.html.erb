@@ -1,7 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><h1><%= @serie.title %></h1> <%= image_tag @serie.picture.url if @serie.picture? %></div>
+  <div class="panel-heading"><h1><%= @serie.title %></h1>
+  <% if @favorite_serie.exists? %>
+    <%= button_to "Unmark as favorite", @favorite_serie.first, :method => :delete %>
+  <% else %>
+    <%= button_to "Mark as favorite", new_series_favorite_series_path(@serie), :method => :get %>
+  <% end %>
+  </div>
+  <div><%= image_tag @serie.picture.url if @serie.picture? %></div>
   <div class="panel-body">
     <div class="serie-atrib">
       Genre: <%= @serie.genre %>

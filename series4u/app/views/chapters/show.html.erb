@@ -2,6 +2,13 @@
 <div class="panel panel-default">
   <div class="panel-heading"><h1>Title: <%= @chapter.title %></h1>
     <div>
+      <% if @favorite_chapter.exists? %>
+        <%= button_to "Unmark as favorite", @favorite_chapter.first, :method => :delete %>
+      <% else %>
+        <%= button_to "Mark as favorite", new_chapter_favorite_chapter_path(@chapter), :method => :get %>
+      <% end %>
+    </div>
+    <div>
       <% if @view.exists? %>
       <%= button_to "Mark as unseen", @view.first, :id => "mark-unseen-btn",
           :class => "btn btn-warning", :method => :delete %>
@@ -9,13 +16,12 @@
       <%= button_to "Mark as seen", new_chapter_view_path(@chapter), :id => "mark-seen-btn",
           :class => "btn btn-warning", :method => :get %>
       <% end %>
-    
     </div>
   </div>
   <div class="panel-body">
     <div class="serie-atrib">
       <% if @view.exists? %>
-      <strong>Status</strong>: Viewed. 
+      <strong>Status</strong>: Viewed.
     <% else %>
       <strong>Status</strong>: Not seen yet.
     <% end %>

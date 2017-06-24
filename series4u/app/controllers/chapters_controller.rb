@@ -11,6 +11,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/1.json
   def show
     @chapter = Chapter.find(params[:id])
+    @favorite_chapter = FavoriteChapter.where(chapter: @chapter, user: current_user)
     @view = View.where(user: current_user, chapter: @chapter)
     @views = View.where(chapter: @chapter)
     @chapter_rating = ChapterRating.where(view: @view)

@@ -3,6 +3,7 @@ class Serie < ApplicationRecord
   has_many :serie_reviews, dependent: :destroy
   has_many :seasons, dependent: :destroy
   has_many :chapters, through: :seasons, dependent: :destroy
+  has_many :favorite_series, dependent: :destroy
 
   mount_uploader :picture, SeriePictureUploader
 

@@ -11,10 +11,8 @@ Rails.application.routes.draw do
   resources :series, only: [:index, :show, :delete]
   resources :series do
     resources :seasons, shallow: true
-  end
-
-  resources :series do
     resources :serie_reviews, shallow: true
+    resources :favorite_series, shallow: true
   end
 
   resources :seasons do
@@ -23,12 +21,9 @@ Rails.application.routes.draw do
 
   resources :chapters do
     resources :views, shallow: true
-  end
-  resources :chapters do
     resources :chapter_ratings, shallow: true
-  end
-  resources :chapters do
     resources :chapter_reviews, shallow: true
+    resources :favorite_chapters, shallow: true
   end
 
   resources :chapter_acts, only: [:delete]
