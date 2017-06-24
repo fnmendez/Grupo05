@@ -1,0 +1,17 @@
+<%= form_with(model: favorite_chapter, local: true) do |form| %>
+  <% if favorite_chapter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(favorite_chapter.errors.count, "error") %> prohibited this favorite_chapter from being saved:</h2>
+
+      <ul>
+      <% favorite_chapter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

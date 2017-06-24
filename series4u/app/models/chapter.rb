@@ -6,6 +6,7 @@ class Chapter < ApplicationRecord
   has_many :actors, through: :chapter_acts
   has_many :directors, through: :chapter_directeds
   has_many :views, dependent: :destroy
+  has_many :favorite_chapters, dependent: :destroy
   validates :title, presence: true
   validates :user, presence: true
   validates :season, presence: true
@@ -19,7 +20,7 @@ class Chapter < ApplicationRecord
     end
     all.select{ |chap| chap.season.serie.public? || chap.season.serie.user == viewer }
   end
-  
+
   def self.search_by_title(t)
     where("title LIKE ?","%#{t}%")
   end
