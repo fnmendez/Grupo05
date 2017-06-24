@@ -14,21 +14,26 @@ class SerieReviewsController < ApplicationController
 
   # GET /serie_reviews/new
   def new
+    @serie = Serie.find(params[:series_id])
     @serie_review = SerieReview.new
   end
 
   # GET /serie_reviews/1/edit
   def edit
+    @serie_review = SerieReview.find(params[:id])
+    @serie = @serie_review.serie
   end
 
   # POST /serie_reviews
   # POST /serie_reviews.json
   def create
     @serie_review = SerieReview.new(serie_review_params)
+    @serie_review.user = current_user
+    @serie_review.serie = Serie.find(params[:series_id])
 
     respond_to do |format|
       if @serie_review.save
-        format.html { redirect_to @serie_review, notice: 'Serie review was successfully created.' }
+        format.html { redirect_to @serie_review.serie, notice: 'Serie review was successfully created.' }
         format.json { render :show, status: :created, location: @serie_review }
       else
         format.html { render :new }
@@ -40,9 +45,10 @@ class SerieReviewsController < ApplicationController
   # PATCH/PUT /serie_reviews/1
   # PATCH/PUT /serie_reviews/1.json
   def update
+    @serie = @serie_review.serie
     respond_to do |format|
       if @serie_review.update(serie_review_params)
-        format.html { redirect_to @serie_review, notice: 'Serie review was successfully updated.' }
+        format.html { redirect_to @serie, notice: 'Serie review was successfully updated.' }
         format.json { render :show, status: :ok, location: @serie_review }
       else
         format.html { render :edit }
@@ -55,8 +61,9 @@ class SerieReviewsController < ApplicationController
   # DELETE /serie_reviews/1.json
   def destroy
     @serie_review.destroy
+    @serie = @serie_review.serie
     respond_to do |format|
-      format.html { redirect_to serie_reviews_url, notice: 'Serie review was successfully destroyed.' }
+      format.html { redirect_to @serie, notice: 'Serie review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +76,6 @@ class SerieReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def serie_review_params
-      params.require(:serie_review).permit(:content)
+      params.require(:serie_review).permit(:content, :series_id)
     end
 end

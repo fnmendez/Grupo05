@@ -1,6 +1,5 @@
 <h1>Editing Serie Review</h1>
 
-<%= render 'form', serie_review: @serie_review %>
+<%= render 'form', { url: {controller: "serie_reviews", action: "update"}} %>
 
-<%= link_to 'Show', @serie_review %> |
-<%= link_to 'Back', serie_reviews_path %>
+<%= link_to 'Back', @serie %>
