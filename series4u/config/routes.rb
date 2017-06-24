@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # get '/users/auth/:provider/callback' => 'users/sessions#create'
+
   get '/series/new' => 'series#new', as: :new_series
   post '/series/new' => 'series#create'
   get '/series/:id/edit' => 'series#edit', as: :edit_series
@@ -34,7 +36,8 @@ Rails.application.routes.draw do
   devise_for :user, controllers: {
       passwords: 'users/passwords',
       registrations: 'users/registrations',
-      sessions: 'users/sessions'
+      sessions: 'users/sessions',
+      omniauth_callbacks: 'users/omniauth_callbacks'
   }, skip: [:sessions]
 
   as :user do
