@@ -11,6 +11,7 @@ class SeriesController < ApplicationController
   # GET /series/1.json
   def show
     @serie = Serie.find(params[:id])
+    @serie_reviews = SerieReview.where(serie: @serie)
   end
 
   # GET /series/new

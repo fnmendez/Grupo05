@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resources :seasons, shallow: true
   end
 
+  resources :series do
+    resources :serie_reviews, shallow: true
+  end
+
   resources :seasons do
     resources :chapters, shallow: true
   end
@@ -53,7 +57,7 @@ Rails.application.routes.draw do
       get 'promote'
     end
   end
-  
+
   resources :kids, only: [:index, :show, :new, :create]
   resources :stories
   delete 'kids' => 'users#destroy_kid', as: :destroy_kid
