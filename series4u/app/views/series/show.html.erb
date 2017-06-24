@@ -12,6 +12,14 @@
     <div class="serie-atrib">
       Country: <%= @serie.country %>
     </div>
+    <% unless @imdb_result.nil? %>
+      <div class="imdb-results">
+        <div class="serie-atrib">
+          IMDB Rating: <%= @imdb_result.rating %>/10
+        </div>
+        <%= image_tag(@imdb_result.poster_url, size: 250)%>
+      </div>
+    <% end %>
       </div>
     </div>
 
