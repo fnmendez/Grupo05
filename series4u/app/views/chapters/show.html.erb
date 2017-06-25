@@ -18,24 +18,6 @@
       <% end %>
     </div>
   </div>
-  <div class="panel-heading"><h3>Schedule</h3>
-    <div class="panel-body">
-      <% if @to_see.exists? %>
-        Scheduled to <%= @to_see.first.start_time %>
-        <%= button_to "Unschedule", @to_see.first, :method => :delete %>
-      <% else %>
-        <%= form_for @new_to_see, url: chapter_to_sees_path(@chapter) do |form| %>
-          <div class="field">
-            <%= form.label :start_time %>
-            <%= form.datetime_select :start_time, id: :to_see_start_time %>
-          </div>
-          <div class="actions">
-            <%= form.submit 'Create' %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
 
   <div class="panel-body">
     <div class="serie-atrib">
@@ -142,7 +124,24 @@
     </div>
       </div>
     </div>
-
+<div class="panel-heading"><h3>Schedule</h3>
+  <div class="panel-body" align="left">
+    <% if @to_see.exists? %>
+      Scheduled to <%= @to_see.first.start_time %>
+      <%= button_to "Unschedule", @to_see.first, :method => :delete %>
+    <% else %>
+      <%= form_for @new_to_see, url: chapter_to_sees_path(@chapter) do |form| %>
+        <div class="field">
+          <%= form.label :start_time %>
+          <%= form.datetime_select :start_time, id: :to_see_start_time %>
+        </div>
+        <div class="actions">
+          <%= form.submit 'Create' %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 <% if user_signed_in? && (current_user.is_admin? || @chapter.season.serie.user == current_user) %>
   <%= form_for :share, url: share_chapter_path do |form| %>
