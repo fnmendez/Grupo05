@@ -34,12 +34,13 @@
 	    <%- if user_signed_in? %>
 	   	<% if current_user.is_admin? %>
         	<li><%= link_to 'Users', users_path, class: 'navbar-link' %></li>
+          <li><%= link_to 'General Stats', '/stats', class: 'navbar-link' %></li>
 		<% end %>
+    <li><%= link_to 'My Stats', '/user_stats', class: 'navbar-link'%></li>
 		<li><%= link_to 'My Schedule', '/schedule', class: 'navbar-link' %></li>
 		<li><%= link_to 'My Favorites', '/favorites', class: 'navbar-link' %></li>
 		<li><%= link_to 'My Profile', user_path, class: 'navbar-link' %></li>
 		<li><%= link_to 'Logout', destroy_user_session_path, class: 'navbar-link' %></li>
-
 		 <% end -%>
 	      </ul>
 	    </div>

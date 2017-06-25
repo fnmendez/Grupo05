@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   # get '/users/auth/:provider/callback' => 'users/sessions#create'
 
+  get '/stats' => 'charts#stats'
+  get '/user_stats' => 'charts#user_stats'
+
   get '/series/new' => 'series#new', as: :new_series
   post '/series/new' => 'series#create'
   get '/series/:id/edit' => 'series#edit', as: :edit_series
