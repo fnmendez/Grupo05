@@ -14,10 +14,11 @@ class SeriesController < ApplicationController
     @favorite_serie = FavoriteSerie.where(serie: @serie, user: current_user)
     @serie_reviews = SerieReview.where(serie: @serie)
     imdb = FilmBuff.new(ssl:false)
-    search = imdb.search_for_title(@serie.title, types: %w(title_popular))
-    @imdb_result = nil
-    if search.length > 0
+    begin
+      search = imdb.search_for_title(@serie.title, types: %w(title_popular))
       @imdb_result = imdb.look_up_id(search[0][:imdb_id])
+    rescue FilmBuff::NotFound
+      @imdb_result = nil
     end
   end
 
@@ -62,7 +63,10 @@ class SeriesController < ApplicationController
   # DELETE /series/1
   # DELETE /series/1.json
   def destroy
-    @series.destroy
+    @serie = Serie.find(params[:id])
+    if @serie.user == current_user || current_user.is_admin?
+      @serie.destroy
+    end
     respond_to do |format|
       format.html { redirect_to series_index_path, notice: 'Serie was successfully destroyed.' }
       format.json { head :no_content }
