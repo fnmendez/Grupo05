@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_many :favorite_series
   has_many :favorite_chapters
 
+  has_many :to_sees
+
   mount_uploader :picture, ProfilePictureUploader
 
   validates :username,
