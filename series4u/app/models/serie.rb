@@ -40,6 +40,6 @@ class Serie < ApplicationRecord
     @by_title = self.search_by_title(t, viewer)
     @by_genre = self.search_by_genre(g, viewer)
     @by_title & @by_genre
-
   end
+
 end

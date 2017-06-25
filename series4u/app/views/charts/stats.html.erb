@@ -1,3 +1,11 @@
 <div class="graph">
-  <%= column_chart @views_serie, title: "Views per serie", download: true %>
+  <%= pie_chart @views_serie, title: "Views per serie", download: true %>
+</div>
+
+<div class="graph">
+  <%= column_chart @stars_serie, title: "Stars per serie", download: true %>
+</div>
+
+<div class="graph">
+  <%= column_chart @ratings_serie, title: "Most rated serie", download: true %>
 </div>
