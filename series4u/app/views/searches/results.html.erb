@@ -1,24 +1,61 @@
 <% provide :title, 'Welcome' %>
-<h1 align="center" id="results-title">  Advanced search</h1>
-<div class="divider"></div>
-<h2 id="results-title"> Series </h2>
-<ul class="list-group" id='stories'>
+<h1 align="center" id="results-title">  Search results</h1>
+<div class="divider">
+<table class='table'>
+	<tr><h2 align="center"> Series </h2></tr>
+	<thead>
+		  <tr>
+		    <th>
+		      <%= link_to "Title", :sort => "series-title", :title => @title, :genre =>  @genre %>
+		    </th>
+		    <th>
+		      <%= link_to "Country", :sort => "series-country", :title => @title, :genre =>  @genre %>
+		    </th>
+		    <th>
+		      <%= link_to "Added by", :sort => "series-user", :title => @title, :genre =>  @genre %>
+		    </th>
+		  </tr>
+	</thead>
+
  	<%if @series.blank?%>
-  		<h4> No series found.</h4>
+  		<tr><h4 align="left"> No series found.</h4></tr>
 	<%else%>
 		<% @series.each do |s| %>
-			<li class="list-group-item"><%= link_to s.title, series_path(s) %></li>
-  		<% end %>
+		  
+	       <tr>
+	       <td><%= link_to s.title, series_path(s) %></td>
+	       <td><%= s.country %></td>
+	       <td><%= s.user.username %></td>
+	       </tr> 
+  		<% end %> 
   	<% end %>
- </ul>
- <h2 id="results-series-title"> Chapters </h2>
- <ul class="list-group" id='stories'>
+</table>
+<table class="table">
+ <tr><h2 id="results-series-title" align="center"> Chapters </h2></tr>
+		<thead>
+	  <tr>
+	    <th>
+	      <%= link_to "Title", :sort => "chapters-title", :title => @title, :genre =>  @genre %>
+	    </th>
+	    <th>
+	      <%= link_to "From", :sort => "chapters-from", :title => @title, :genre =>  @genre %>
+	    </th>
+	    <th>
+	      <%= link_to "Added by", :sort => "chapters-user", :title => @title, :genre =>  @genre %>
+	    </th>
+	  </tr>
+	  </thead>
+
   	<%if @chapters.blank? %>
-  		<h4>No chapters found.</h4>
+  		<tr><h4 align="left">No chapters found.</h4></tr>
 	<%else%>
 		<% @chapters.each do |s| %>
-			<li class="list-group-item"><%= link_to s.title, chapter_path(s) %></li>
+			<tr>
+	       <td><%= link_to s.title, chapter_path(s) %></td>
+	       <td><%= s.season.serie.title %></td>
+	       <td><%= s.user.username %></td>
+	       </tr> 
 		<% end %>
 	<% end %>	
-</ul>
-
+</table>
+</div>

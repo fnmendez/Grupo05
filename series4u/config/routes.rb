@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post '/chapters/:id/share' => 'chapters#share', as: :share_chapter
   post '/series/:id/share' => 'series#share', as: :share_serie
   get '/favorites' => 'favorites#show'
+  get '/schedule' => 'schedules#show'
 
   resources :series, only: [:index, :show, :delete]
   resources :series do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :chapters do
+    resources :to_sees, shallow: true
     resources :views, shallow: true
     resources :chapter_ratings, shallow: true
     resources :chapter_reviews, shallow: true

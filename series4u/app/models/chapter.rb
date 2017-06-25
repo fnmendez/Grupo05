@@ -7,6 +7,7 @@ class Chapter < ApplicationRecord
   has_many :directors, through: :chapter_directeds
   has_many :views, dependent: :destroy
   has_many :favorite_chapters, dependent: :destroy
+  has_many :to_sees, dependent: :destroy
   validates :title, presence: true
   validates :user, presence: true
   validates :season, presence: true
@@ -22,7 +23,7 @@ class Chapter < ApplicationRecord
   end
 
   def self.search_by_title(t)
-    where("title LIKE ?","%#{t}%")
+    where("title ILIKE ?","%#{t}%")
   end
 
   def self.search(t, viewer)

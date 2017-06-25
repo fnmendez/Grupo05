@@ -22,14 +22,20 @@
 
     <% unless @imdb_result.nil? %>
       <div class="imdb-results">
-        <div class="serie-atrib">
-          IMDB Rating: <%= @imdb_result.rating %>/10
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag(@imdb_result.poster_url, size: 60)%>
         </div>
-        <%= image_tag(@imdb_result.poster_url, size: 250)%>
+        <div class="media-body">
+          <h4 class="media-heading">IMDB Rating</h4>
+          <p><%= @imdb_result.rating %>/10</p>
+        </div>
       </div>
+      
     <% end %>
+    </div>
   </div>
-</div>
+
 
 <p>
   <h3>Reviews:</h3>
@@ -107,11 +113,14 @@
         <%= form.text_field :email %>
         <%= form.submit 'Share' %>
     <% end %>
-  	<%= button_to "Edit", edit_series_path(@serie), :id => "edit-series-btn",
-      :class => "btn btn-default", :method => :get %>
-    <%= button_to "Destroy", @serie, :id => "delete-series-btn",
-      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
-
+    <table>
+    <tr>
+  	<td><%= button_to "Edit", edit_series_path(@serie), :id => "edit-series-btn",
+      :class => "btn btn-default", :method => :get %></td>
+    <td><%= button_to "Destroy", @serie, :id => "delete-series-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+</table>
 <% end %>
 <div><%= button_to "Back", series_index_path, :id => "backs-series-btn",
       :class => "btn btn-default", :method => :get %></div>
