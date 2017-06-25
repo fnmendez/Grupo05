@@ -1,11 +1,19 @@
 <div class="graph">
-  <%= pie_chart @views_serie, title: "Views per serie", download: true %>
+  <%= pie_chart @views_serie, title: "Most viewed series", download: true %>
 </div>
 
 <div class="graph">
-  <%= column_chart @stars_serie, title: "Stars per serie", download: true %>
+  <%= column_chart @stars_serie_best, title: "Top Series by average stars", download: true %>
 </div>
 
 <div class="graph">
-  <%= column_chart @ratings_serie, title: "Most rated serie", download: true %>
+  <%= column_chart @stars_serie_worst, title: "Worst Series by average stars", download: true %>
+</div>
+
+<div class="graph">
+  <%= column_chart @user_views, title: "Users with the most views", download: true %>
+</div>
+
+<div class="graph">
+  <%= column_chart @user_contrib, title: "Users with the most chapters added", download: true %>
 </div>
