@@ -19,17 +19,23 @@ class SearchesController < ApplicationController
 			@chapters = Chapter.search(params[:title], current_user)
 			@to_sort = params[:sort].split("-")[0]
 			@criterio = params[:sort].split("-")[1]
-			if @criterio == "user"
-				@criterio = "user.username"
-			end
-			if  @criterio == "from"
-				@criterio = "season.serie.title"
-			end
-			@criterio = @criterio.to_sym
+
 			if @to_sort == "series"
-				@series = @series.sort_by { |s| s[@criterio] }
+
+				if @criterio == "user"
+					@series = @series.sort_by { |s| s.user.username}
+				else
+					@series = @series.sort_by { |s| s[@criterio.to_sym]}
+				end
+
 			elsif @to_sort == "chapters"
-				@chapters = @chapters.sort_by { |c| c[@criterio] }
+				if @criterio == "user"
+					@chapters = @chapters.sort_by { |c| c.user.username }
+				elsif @criterio == "from"
+					@chapters = @chapters.sort_by { |c| c.season.serie.title }
+				else
+					@chapters = @chapters.sort_by { |c| c[@criterio.to_sym]}
+				end
 			end
 		end
 	end
