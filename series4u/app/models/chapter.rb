@@ -23,7 +23,7 @@ class Chapter < ApplicationRecord
   end
 
   def self.search_by_title(t)
-    where("title LIKE ?","%#{t}%")
+    where("title ILIKE ?","%#{t}%")
   end
 
   def self.search(t, viewer)

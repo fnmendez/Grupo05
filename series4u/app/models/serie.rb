@@ -26,13 +26,13 @@ class Serie < ApplicationRecord
   end
     def self.search_by_title(t, viewer)
     @viewable = self.viewable_series(viewer)
-    @matched = where("title LIKE ?","%#{t}%")
+    @matched = where("title ILIKE ?","%#{t}%")
     @viewable & @matched
   end
 
   def self.search_by_genre(g, viewer)
     @viewable = self.viewable_series(viewer)
-    @matched = where("genre LIKE ?","%#{g}%")
+    @matched = where("genre ILIKE ?","%#{g}%")
     @viewable & @matched
   end
 
