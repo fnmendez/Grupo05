@@ -13,10 +13,14 @@
 
 <% if user_signed_in? && (current_user.is_admin? || @season.serie.user == current_user) %>
 	<div>
-  	<%= button_to "Edit", edit_season_path(@season), :id => "edit-season-btn",
-      :class => "btn btn-default", :method => :get %>
-    <%= button_to "Destroy", @season, :id => "delete-season-btn",
-      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %>
+  <table>
+  <tr>
+  	<td><%= button_to "Edit", edit_season_path(@season), :id => "edit-season-btn",
+      :class => "btn btn-default", :method => :get %></td>
+    <td><%= button_to "Destroy", @season, :id => "delete-season-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      </table>
     </div>
 <% end %>
 

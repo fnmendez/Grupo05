@@ -10,10 +10,13 @@
   </div>
 </div>
   <% if user_signed_in? && current_user.is_admin? %>
-    <div><%= link_to 'Edit story', edit_story_path(@story), class: 'button-primary' %></div>
-    <div><%= link_to 'Delete', story_path(@story), :method => :delete,
-                                            :confirm => "Are you sure you want to delete?",
-                                            :remote => true,
-                                            class: 'btn btn-table-action btn-danger' %></div>
+    <table>
+    <tr>
+    <td><%= button_to "Edit story", edit_story_path(@story), :id => "edit-story-btn",
+      :class => "btn btn-default", :method => :get %></td>
+    <td><%= button_to "Destroy", story_path(@story), :id => "delete-story-btn",
+      :class => "btn btn-danger", :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      </table>
   <% end %>
 
