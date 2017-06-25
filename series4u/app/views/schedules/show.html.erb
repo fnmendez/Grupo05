@@ -1,0 +1,11 @@
+<h1 align="center">Favorites Series</h1>
+
+<%= month_calendar events: @to_sees do |date, to_sees| %>
+  <%= date %>
+
+  <% to_sees.each do |to_see| %>
+    <div>
+      <%= to_see.chapter.title %>
+    </div>
+  <% end %>
+<% end %>
