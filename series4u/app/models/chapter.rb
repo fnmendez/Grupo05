@@ -31,4 +31,21 @@ class Chapter < ApplicationRecord
     @by_title = search_by_title(t)
     @viewable & @by_title
   end
+
+  def serie
+    self.season.serie
+  end
+
+  def average_rating
+    ratings = ChapterRating.where(view: self.views)
+    if ratings.count == 0
+      return 0
+    end
+    total = 0
+    ratings.each do |rating|
+      total+=rating.stars
+    end
+    total/ratings.count
+  end
+
 end
