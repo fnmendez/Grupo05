@@ -33,6 +33,14 @@ Enter it again: series4udb
 
 `$ bundle install`
 
-#### 7. Abrir la conexión local
+#### 7. Crear base de datos
+
+`$ rails db:create`
+
+#### 8. Realizar migraciones
+
+`$ rails db:migrate`
+
+#### 9. Abrir la conexión local
 
 `$ rails server`
