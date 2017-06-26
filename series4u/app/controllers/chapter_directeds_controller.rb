@@ -25,10 +25,12 @@ class ChapterDirectedsController < ApplicationController
   # POST /chapter_directed.json
   def create
     @chapter_directed = ChapterDirected.new(chapter_directed_params)
+    @chapter = Chapter.find(params[:chapter_id])
+    @chapter_directed.chapter = @chapter
 
     respond_to do |format|
       if @chapter_directed.save
-        format.html { redirect_to @chapter_directed, notice: 'ChapterDirected was successfully created.' }
+        format.html { redirect_to @chapter, notice: 'Director was successfully added.' }
         format.json { render :show, status: :created, location: @chapter_directed }
       else
         format.html { render :new }
@@ -56,7 +58,7 @@ class ChapterDirectedsController < ApplicationController
   def destroy
     @chapter_directed.destroy
     respond_to do |format|
-      format.html { redirect_to Chapter.find(@chapter_directed.chapter_id), notice: 'The Director presence was successfully destroyed.' }
+      format.html { redirect_to @chapter_directed.chapter, notice: 'The Director presence was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class ChapterDirectedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_directed_params
-      params.fetch(:chapter_directed, {})
+      params.require(:chapter_directed).permit(:director_id)
     end
 end

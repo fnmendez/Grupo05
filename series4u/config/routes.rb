@@ -25,15 +25,16 @@ Rails.application.routes.draw do
   end
 
   resources :chapters do
+    resources :chapter_acts, shallow: true
+    resources :chapter_directeds, shallow: true
+    resources :actors, shallow: true
+    resources :directors, shallow: true
     resources :to_sees, shallow: true
     resources :views, shallow: true
     resources :chapter_ratings, shallow: true
     resources :chapter_reviews, shallow: true
     resources :favorite_chapters, shallow: true
   end
-
-  resources :chapter_acts, only: [:delete]
-  resources :chapter_directeds, only: [:delete]
 
   # devise_for :users
   devise_for :user, controllers: {
