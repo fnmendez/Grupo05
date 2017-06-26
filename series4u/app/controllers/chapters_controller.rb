@@ -11,6 +11,12 @@ class ChaptersController < ApplicationController
   # GET /chapters/1.json
   def show
     @chapter = Chapter.find(params[:id])
+    @actors = Actor.all
+    @directors = Director.all
+    @new_chapter_act = ChapterAct.new
+    @new_chapter_directed = ChapterDirected.new
+    @new_actor = Actor.new
+    @new_director = Director.new
     @new_to_see = ToSee.new
     @to_see = ToSee.where(user: current_user, chapter: @chapter)
     @favorite_chapter = FavoriteChapter.where(chapter: @chapter, user: current_user)

@@ -44,16 +44,50 @@
   <div class="panel-body">
     <div class="serie-atrib">
   <strong>Actors:</strong>
-    <% @chapter.actors.each do |actor| %>
-      <%= actor.name %>
-      <%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% @chapter.chapter_acts.each do |chact| %>
+      <%= chact.actor.name %>
+      <%= link_to 'Destroy', chact, method: :delete %>,
+    <% end %>
+    <%= form_for @new_actor, url: chapter_actors_path(@chapter) do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :actor_name %>
+      </div>
+      <div class="actions">
+        <%= form.submit 'Create' %>
+      </div>
+    <% end %>
+    <%= form_for @new_chapter_act, url: chapter_chapter_acts_path(@chapter) do |form| %>
+      <div class="field">
+        <%= form.collection_select :actor_id, @actors.order(:name), :id, :name, include_blank: true %>
+      </div>
+      <div class="actions">
+        <%= form.submit 'Add' %>
+      </div>
     <% end %>
     </div>
     <div class="serie-atrib">
       <strong>Directors:</strong>
-    <% @chapter.directors.each do |director| %>
-      <%= director.name %>
-      <%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %>,
+    <% @chapter.chapter_directeds.each do |chadir| %>
+      <%= chadir.director.name %>
+      <%= link_to 'Destroy', chadir, method: :delete %>,
+    <% end %>
+    <%= form_for @new_director, url: chapter_directors_path(@chapter) do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :director_name %>
+      </div>
+      <div class="actions">
+        <%= form.submit 'Create' %>
+      </div>
+    <% end %>
+    <%= form_for @new_chapter_directed, url: chapter_chapter_directeds_path(@chapter) do |form| %>
+      <div class="field">
+        <%= form.collection_select :director_id, @directors.order(:name), :id, :name, include_blank: true %>
+      </div>
+      <div class="actions">
+        <%= form.submit 'Add' %>
+      </div>
     <% end %>
     </div>
     <% if user_signed_in? %>
