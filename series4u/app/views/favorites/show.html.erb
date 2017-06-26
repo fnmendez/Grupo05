@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1 align="center">Favorites Series</h1>
+<% if @favorite_series.exists? %>
+	<div class="row">
+	<% @favorite_series.each do |fav| %>
+	  <div class="col-sm-5 col-md-4">
+	    <div class="thumbnail">
+	      <%= image_tag fav.serie.picture.url if fav.serie.picture? %>
+	      <div class="caption">
+	        <h3><%= fav.serie.title %></h3>
+	        <p>Country: <%= fav.serie.country %></p>
+	        <p><%= button_to "More info", fav.serie, :id => "open-contacts-dialog-btn",
+	      :class => "btn btn-primary", :method => :get %></p>
+	      </div>
+	    </div>
+	  </div>
+	<% end %>
+	</div>
+<% else %>
+	<center>You don't have any favorite serie yet.</center>
+<% end %>
+<div>
+<h2 align="center">Favorite Chapters</h2>
+<% if @favorite_chapters.exists? %>
+	<table class='table'>
+		<thead>
+			<tr>
+				<th>
+					Title
+				</th>
+				<th>
+					Summary
+				</th>
+				<th>
+					Added by
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @favorite_chapters.each do |fav| %>
+				<tr>
+					<td><%= fav.chapter.title %></td>
+					<td><%= fav.chapter.summary %></td>
+					<td><%= fav.chapter.user.username %></td>
+					<td><%= link_to 'Show', fav.chapter %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<center> You don't have any favorite chapter yet. </center>
+<% end %>
+</div>

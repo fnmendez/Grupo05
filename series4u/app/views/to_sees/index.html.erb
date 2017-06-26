@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>To Sees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @to_sees.each do |to_see| %>
+      <tr>
+        <td><%= to_see.start_time %></td>
+        <td><%= link_to 'Show', to_see %></td>
+        <td><%= link_to 'Edit', edit_to_see_path(to_see) %></td>
+        <td><%= link_to 'Destroy', to_see, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New To See', new_to_see_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527192718) do
+ActiveRecord::Schema.define(version: 20170625001758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,24 @@ ActiveRecord::Schema.define(version: 20170527192718) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorite_chapters", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chapter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_favorite_chapters_on_chapter_id"
+    t.index ["user_id"], name: "index_favorite_chapters_on_user_id"
+  end
+
+  create_table "favorite_series", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "serie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["serie_id"], name: "index_favorite_series_on_serie_id"
+    t.index ["user_id"], name: "index_favorite_series_on_user_id"
   end
 
   create_table "kids", force: :cascade do |t|
@@ -145,6 +163,16 @@ ActiveRecord::Schema.define(version: 20170527192718) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "to_sees", force: :cascade do |t|
+    t.datetime "start_time"
+    t.bigint "user_id"
+    t.bigint "chapter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_to_sees_on_chapter_id"
+    t.index ["user_id"], name: "index_to_sees_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -165,6 +193,8 @@ ActiveRecord::Schema.define(version: 20170527192718) do
     t.string "facebook_name"
     t.string "username"
     t.string "picture"
+    t.string "provider"
+    t.string "uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -186,6 +216,10 @@ ActiveRecord::Schema.define(version: 20170527192718) do
   add_foreign_key "chapter_reviews", "views"
   add_foreign_key "chapters", "seasons"
   add_foreign_key "chapters", "users"
+  add_foreign_key "favorite_chapters", "chapters"
+  add_foreign_key "favorite_chapters", "users"
+  add_foreign_key "favorite_series", "series", column: "serie_id"
+  add_foreign_key "favorite_series", "users"
   add_foreign_key "serie_acts", "actors"
   add_foreign_key "serie_acts", "series", column: "serie_id"
   add_foreign_key "serie_directeds", "directors"
@@ -195,6 +229,8 @@ ActiveRecord::Schema.define(version: 20170527192718) do
   add_foreign_key "serie_reviews", "series", column: "serie_id"
   add_foreign_key "serie_reviews", "users"
   add_foreign_key "series", "users"
+  add_foreign_key "to_sees", "chapters"
+  add_foreign_key "to_sees", "users"
   add_foreign_key "views", "chapters"
   add_foreign_key "views", "users"
 end

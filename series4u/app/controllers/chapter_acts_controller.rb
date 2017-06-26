@@ -25,10 +25,12 @@ class ChapterActsController < ApplicationController
   # POST /chapter_act.json
   def create
     @chapter_act = ChapterAct.new(chapter_act_params)
+    @chapter = Chapter.find(params[:chapter_id])
+    @chapter_act.chapter = @chapter
 
     respond_to do |format|
       if @chapter_act.save
-        format.html { redirect_to Chapter.find(@chapter_act.chapter_id), notice: 'ChapterAct was successfully created.' }
+        format.html { redirect_to @chapter, notice: 'Actor was successfully added.' }
         format.json { render :show, status: :created, location: @chapter_act }
       else
         format.html { render :new }
@@ -56,7 +58,7 @@ class ChapterActsController < ApplicationController
   def destroy
     @chapter_act.destroy
     respond_to do |format|
-      format.html { redirect_to Chapter.find(@chapter_act.chapter_id), notice: 'The Actor presence was successfully destroyed.' }
+      format.html { redirect_to @chapter_act.chapter, notice: 'The Actor presence was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class ChapterActsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_act_params
-      params.fetch(:chapter_act, {})
+      params.require(:chapter_act).permit(:actor_id)
     end
 end

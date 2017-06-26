@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Favorite Chapters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorite_chapters.each do |favorite_chapter| %>
+      <tr>
+        <td><%= link_to 'Show', favorite_chapter %></td>
+        <td><%= link_to 'Edit', edit_favorite_chapter_path(favorite_chapter) %></td>
+        <td><%= link_to 'Destroy', favorite_chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Favorite Chapter', new_favorite_chapter_path %>
