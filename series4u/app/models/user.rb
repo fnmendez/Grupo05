@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :favorite_serie, dependent: :destroy
   has_many :favorite_chapters, dependent: :destroy
 
-  has_many :to_sees
+  has_many :to_sees, dependent: :destroy
 
   mount_uploader :picture, ProfilePictureUploader
 
