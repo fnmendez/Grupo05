@@ -3,9 +3,15 @@ class Serie < ApplicationRecord
   has_many :serie_reviews, dependent: :destroy
   has_many :seasons, dependent: :destroy
   has_many :chapters, through: :seasons, dependent: :destroy
-  has_many :favorite_serie, dependent: :destroy
+  has_many :favorite_series
 
   mount_uploader :picture, SeriePictureUploader
+
+  before_destroy :destroy_favs
+
+  def destroy_favs
+    FavoriteSerie.destroy_from(self)
+  end
 
   def public?
     self.user.is_admin?
