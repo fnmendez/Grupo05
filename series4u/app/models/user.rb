@@ -19,8 +19,8 @@ class User < ApplicationRecord
   has_many :inverse_kids, class_name: 'Kid', foreign_key: 'kiddy_id'
   has_many :parents, through: :inverse_kids, source: :user
 
-  has_many :favorite_series
-  has_many :favorite_chapters
+  has_many :favorite_serie, dependent: :destroy
+  has_many :favorite_chapters, dependent: :destroy
 
   has_many :to_sees
 
