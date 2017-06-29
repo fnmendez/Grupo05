@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook],
          authentication_keys: [:username]
 
-  has_many :chapters
-  has_many :series
+  has_many :chapters, dependent: :destroy
+  has_many :series, dependent: :destroy
   has_many :views, dependent: :destroy
   has_many :chapter_ratings, through: :views
   has_many :chapter_reviews, through: :views
