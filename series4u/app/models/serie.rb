@@ -3,7 +3,7 @@ class Serie < ApplicationRecord
   has_many :serie_reviews, dependent: :destroy
   has_many :seasons, dependent: :destroy
   has_many :chapters, through: :seasons, dependent: :destroy
-  has_many :favorite_series, dependent: :destroy
+  has_many :favorite_serie, dependent: :destroy
 
   mount_uploader :picture, SeriePictureUploader
 
@@ -24,7 +24,7 @@ class Serie < ApplicationRecord
   def self.destroy_from(creator)
     where(user: creator).destroy_all
   end
-    def self.search_by_title(t, viewer)
+  def self.search_by_title(t, viewer)
     @viewable = self.viewable_series(viewer)
     @matched = where("title ILIKE ?","%#{t}%")
     @viewable & @matched
