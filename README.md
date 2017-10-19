@@ -1,6 +1,8 @@
 # Grupo05
 
-## Integrantes
+Application deployed at http://series4u.herokuapp.com
+
+## Members
 
 | Nombre | Github | Email |
 | :----- | :----- | :------- |
@@ -12,11 +14,3 @@
 | Nombre | Github | Email |
 | :----- | :----- | :------- |
 | Ricardo Lira | [@rlira2](https://github.com/rlira2) | rlira2@uc.cl |
-
-________________________
-
-# Read me
-
-Documento de especificaciones del alumno.
-
-Application deployed at http://series4u.herokuapp.com
